@@ -1,3 +1,8 @@
+
+<p align = "middle">
+ <img src="../master/AI-Poster.png"/>
+ </p>
+ 
 # Identifying Different Writing Styles in a Document Intrinsically Using Stylometric Analysis
 
 ## Abstract:
@@ -10,10 +15,6 @@ The study of measurable features of literary style, such as sentence length, rea
 
 Stylometry grew out of earlier techniques of analyzing texts for evidence of authenticity, author identity, and other questions. The development of computers and their capacities for analyzing large quantities of data enhanced this type of effort by orders of magnitude. In the current era of research, Stylometry is widely used in the problems of intrinsic plagiarism detection, genres separation, authorship verifications and authorship attribution, author gender detections and many more. However, the main task is to classify different writing styles from the text, which can further be used to solve above-mentioned problems.
 
-## Literature Review:
-
-We did an in depth study on stylometry, authorship attribution and authorship obfuscation along with little theory on linguistics (e.g zipf's law). These fields used stylometric features to solve the problem. As our work is related to literary writing style so studying linguistics was necessary to actually understand the nuances of these features. Studying them really matured our understanding regarding the project. We started our hunt from Wikipedia [1], studying the basics of stylometry. We learned its basics and advent in the field of computer science, its applications in different fields of computer science and its history. We gathered that currently many researches are doing text analytics using stylometric features. We took some links of research papers with good citations and studied them thoroughly. One research from University of Illinois at Chicago [2] exploited stylometry to distinguish actual human readable text vs paraphrased machine written text using stylometric analysis. We have learned some features from this research paper such as n-grams and some lexical features such as frequency count, punctuations and special characters. Intrinsic plagiarism detection is also an application of stylometric analysis and used in [3]. Given a document, they have identified suspicious sections of the document for plagiarism. We came across another survey [4] which described the use of machine learning and statistics with stylometry.
- 
 ## Introduction:
 
 **Our system determines variations in writings in a text document. These variations can be due to different authors or different genres of writing for example stories, research papers, dramas play etc.**
@@ -36,19 +37,13 @@ The heart of our system lies in feature extraction. We have to use such features
 
 ### Lexical Features:
 
-1.	Average Word Length
-
-2.	Average Sentence Length By Word
-
-3.	Average Sentence Length By Character
-
-4.	Special Character Count
-
-5.	Average Syllable per Word
-
-6.	Functional Words Count
-
-7.	Punctuation Count
+* 1.	Average Word Length
+* 2.	Average Sentence Length By Word
+* 3.	Average Sentence Length By Character
+* 4.	Special Character Count
+* 5.	Average Syllable per Word
+* 6.	Functional Words Count
+* 7.	Punctuation Count
 
 These are the most basic features one can extract from the text. These features tell us about the structure of the text. For example averages of different counts like word lengths, special characters, punctuations and functional words etc. Functional words are used to express grammatical relationships among other words within a sentence. Secondly, if a word has more syllables then it is most likely to be a difficult word (although not necessary). Avg Syllable per word being the measure of complexity, is used in calculations of many other features related to readability scores described in the sections ahead. Punctuation Countand Special Character Count are straight forward ways to differentiate different genres. For example narrative story and research paper.
 
@@ -56,37 +51,25 @@ These are the most basic features one can extract from the text. These features 
 
 Many quantitative studies rely on the concept of vocabulary richness. A text has low vocabulary richness if the same limited vocabulary is repeated over and over again, while it has high vocabulary richness if new words continually appear. In essence, these features tell us about the diversity and richness of the vocabulary used in the text.
 
-1.	Hapax Legomenon
-
-2.	Hapax DisLegemena
-
-3.	Honores R Measure
-
-4.	Sichel’s Measure
-
-5.	Brunets Measure W
-
-6.	Yules Characteristic K
-
-7.	Shannon Entropy
-
-8.	Simpson’s Index
+* 1.	Hapax Legomenon
+* 2.	Hapax DisLegemena
+* 3.	Honores R Measure
+* 4.	Sichel’s Measure
+* 5.	Brunets Measure W
+* 6.	Yules Characteristic K
+* 7.	Shannon Entropy
+* 8.	Simpson’s Index
 
 ### Readability Scores:
 
 Readability is the ease with which a reader can understand a written text. Readability is more than simply legibility—which is a measure of how easily a reader can distinguish individual letters or characters from each other. Features for readability stems from the field of linguistics and researchers have frequently used linguistics’ laws (e.g zipfs law) and lemmas to pull out the currently used features to calculate readability scores of text in the modern computer science. Following is the list of features we are using.
 
-1.	Flesch Reading Ease
-
-2.	Flesch-Kincaid Grade Level
-
-3.	Gunning Fog Index
-
-4.	Dale Chall Readability Formula
-
-5.	Shannon Entropy
-
-6.	Simpson's Index
+* 1.	Flesch Reading Ease
+* 2.	Flesch-Kincaid Grade Level
+* 3.	Gunning Fog Index
+* 4.	Dale Chall Readability Formula
+* 5.	Shannon Entropy
+* 6.	Simpson's Index
 
 
 ### 3) Data Pre-processing:
@@ -156,8 +139,6 @@ A document containing texts with 2 different writing styles (a story and a resea
 
 ![results](../master/Images/results.jpg)
 
-
-
  
 ## Limitations:
 
@@ -169,37 +150,13 @@ In a scenario where the document is written by a single author, one may assume t
 
 To sum up:
 
-1.	Our system takes a document.
-
-2.	Divides it into chunks of 10 sentences.
-
-3.	Computes stylometric features for each chunk.
-
-4.	Then uses the elbow method on these vectors to identify the value of centroids K.
-
-5.	The value of K corresponds to the number of different writing styles the document had.
- 
-6.	In order to visualize the clusters, PCA is used to convert the high dimensional features vector to a 2D one and then the chunks are plotted.
-
-7.	The chunks with same style are grouped under one centroid with same color, hence implying the number of writing styles implied in that document.
+* 1.	Our system takes a document.
+* 2.	Divides it into chunks of 10 sentences.
+* 3.	Computes stylometric features for each chunk.
+* 4.	Then uses the elbow method on these vectors to identify the value of centroids K.
+* 5.	The value of K corresponds to the number of different writing styles the document had.
+* 6.	In order to visualize the clusters, PCA is used to convert the high dimensional features vector to a 2D one and then the chunks are plotted.
+* 7.	The chunks with same style are grouped under one centroid with same color, hence implying the number of writing styles implied in that document.
 
 The heart of our approach is correctly extracting the style from the chunk which is successfully achieved using a mix of different categories of linguistic features like lexical, vocabulary richness and readability scores. Our method is repeated every time for a new document. Since tt identifies the different writing styles in that document, hence our approach can also be used to detect plagiarism.
-
-## References:
-
-1.	https://en.wikipedia.org/wiki/Stylometry
-
-2.	http://homepage.divms.uiowa.edu/~mshafiq/files/shehroze-text-spinner-icdm2017.pdf
-
-3.	https://www.uni-weimar.de/medien/webis/publications/papers/stein_2011a.pdf
-
-4.	http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.440.1634&rep=rep1&type=pdf
-
-5.	Honore´, A. (1979), Some Simple Measures of Richness of Vocabulary. In: Association for Literary and Linguistic Computing Bulletin 7(2), 172177.
-
-6.	R. Flesch. A new readability yardstick. Journal of Applied Psychology, 32:221–233, 1948.
-
-7.	J. Kincaid, R.P. Fishburne, R.L. Rogers, and B.S. Chissom. Derivation of new readability formulas (automated readability index, fog count and flesch reading ease formula) for navy enlisted personnel.
-
-8.	https://sites.google.com/site/parthochoudhury/aMToC_CShannon.pdf?attredirect s=0
  
