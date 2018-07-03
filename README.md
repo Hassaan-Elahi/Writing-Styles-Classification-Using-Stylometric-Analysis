@@ -124,7 +124,7 @@ First of all, compute the sum of squared error (SSE) for some values of k (for e
 
 If we plot k against the SSE, we will see that the error decreases as k gets larger; this is because when the number of clusters increases, distortion gets smaller. The idea of the elbow method is to choose the k at which the SSE decreases abruptly. This produces an "elbow effect" in the graph, as can be seen in the following picture:
 
-![elbow](../master/Images/elbow.png)
+![elbow](../master/Images/elbow.jpg)
 
 In this case, the most suitable value for K is k = 2.
 
@@ -148,12 +148,16 @@ The number of jobs to use for the computation. This works by computing each of t
 
 ## Results:
 
-We ran this experiment with a document file containing two different styles (one of a story and one of a research paper). And our system was correctly able to detect those two different writing styles and also color those chunks with the same writing style. The elbow method successfully returned K = 2 which was our goal.
-[results](../master/Images/results.png)
+We ran this experiment with a document file containing two different styles (one of a story and one of a research paper). And our system was correctly able to detect those two different writing styles and also color those chunks with the same writing style. The elbow 
+method successfully returned K = 2 which was our goal.
+
+
+A document containing texts with 2 different writing styles (a story and a research paper) are clearly distinguished indicating the correctness of our approach:
+
+[results](../master/Images/results.jpg)
 
 
 
-                       *A document containing texts with 2 different writing styles (a story and a research paper) are clearly distinguished indicating the correctness of our approach*
  
 ## Limitations:
 
