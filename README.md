@@ -160,3 +160,13 @@ To sum up:
 
 The heart of our approach is correctly extracting the style from the chunk which is successfully achieved using a mix of different categories of linguistic features like lexical, vocabulary richness and readability scores. Our method is repeated every time for a new document. Since tt identifies the different writing styles in that document, hence our approach can also be used to detect plagiarism.
  
+## Contact
+You can get in touch with me on my LinkedIn Profile: [Haris Muneer](https://www.linkedin.com/in/harismuneer/)
+
+## Issues
+If you face any issue, you can create a new issue in the Issues Tab and I will be glad to help you out.
+
+## License
+[MIT](../master/LICENSE)
+Copyright (c) 2018-present, harismuneer
+
