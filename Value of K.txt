@@ -1,0 +1,3 @@
+
+Run the main.py file. It will create an elbow graph to show you how cost varies with number of clusters.
+You have to put in that value for the analysis function because this K value will be used in the K-means algorithm.
