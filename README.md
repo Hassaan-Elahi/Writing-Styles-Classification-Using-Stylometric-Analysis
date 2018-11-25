@@ -3,7 +3,7 @@
  <img src="../master/AI-Poster.png"/>
  </p>
  
-# ✍️ Identifying Different Writing Styles in a Document Intrinsically Using Stylometric Analysis
+# Identifying Different Writing Styles in a Document Intrinsically Using Stylometric Analysis ✍️ 
 [![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](#)
 [![GitHub Forks](https://img.shields.io/github/forks/harismuneer/Writing-Styles-Classification-Using-Stylometric-Analysis.svg?style=social&label=Fork&maxAge=2592000)](https://www.github.com/harismuneer/Writing-Styles-Classification-Using-Stylometric-Analysis/fork)
 [![Build Status](https://semaphoreapp.com/api/v1/projects/d4cca506-99be-44d2-b19e-176f36ec8cf1/128505/badge.svg)](#)
