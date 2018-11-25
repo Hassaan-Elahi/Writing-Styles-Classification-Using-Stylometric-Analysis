@@ -188,4 +188,4 @@ If you face any issue, you can create a new issue in the Issues Tab and I will b
 ## License
 [![MIT](https://img.shields.io/cocoapods/l/AFNetworking.svg?style=style&label=License&maxAge=2592000)](../master/LICENSE)
 
-Copyright (c) 2018-present, harismuneer                                                        
+Copyright (c) 2018-present, harismuneer, Hassaan-Elahi                                                        
