@@ -143,8 +143,9 @@ method successfully returned K = 2 which was our goal.
 
 A document containing texts with 2 different writing styles (a story and a research paper) are clearly distinguished indicating the correctness of our approach:
 
-![results](../master/Images/results.jpg)
-
+<p align="middle">
+  <img src="../master/Images/results.jpg"/>
+ </p>
  
 ## Limitations:
 
