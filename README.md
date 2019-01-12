@@ -4,6 +4,9 @@
  </p>
  
 # Identifying Different Writing Styles in a Document Intrinsically Using Stylometric Analysis ✍️ 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2538334.svg)](https://doi.org/10.5281/zenodo.2538334)
+
+
 [![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](#)
 [![GitHub Forks](https://img.shields.io/github/forks/harismuneer/Writing-Styles-Classification-Using-Stylometric-Analysis.svg?style=social&label=Fork&maxAge=2592000)](https://www.github.com/harismuneer/Writing-Styles-Classification-Using-Stylometric-Analysis/fork)
 [![Build Status](https://semaphoreapp.com/api/v1/projects/d4cca506-99be-44d2-b19e-176f36ec8cf1/128505/badge.svg)](#)
@@ -170,6 +173,12 @@ The heart of our approach is correctly extracting the style from the chunk which
 -------------------------------------
 ## Code
 The complete code for experimentation is also provided. We have open-sourced it to facilitate research in such an exciting domain.
+
+-------------------------------------
+## Citation
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2538334.svg)](https://doi.org/10.5281/zenodo.2538334)
+
+If you want to cite our work, kindly click the above badge for more information regarding the complete citation for this research work and diffferent citation formats like IEEE, APA etc.
 
 -------------------------------------
 
