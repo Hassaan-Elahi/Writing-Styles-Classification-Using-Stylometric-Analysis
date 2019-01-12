@@ -206,4 +206,5 @@ If you face any issue, you can create a new issue in the Issues Tab and we will 
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a> [![MIT](https://img.shields.io/cocoapods/l/AFNetworking.svg?style=style&label=License&maxAge=2592000)](../master/LICENSE)
 
 The content of this project is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>, and the underlying source code used is licensed under the MIT license. 
+
 Copyright (c) 2018-present, harismuneer, Hassaan-Elahi                                                        
