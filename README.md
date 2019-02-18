@@ -182,14 +182,14 @@ If you want to cite our work, kindly click the above badge for more information 
 
 -------------------------------------
 
-## Author
+## Authors
 You can get in touch with us on our LinkedIn Profiles:
 
 - [![LinkedIn Link](https://img.shields.io/badge/Connect-harismuneer-blue.svg?logo=linkedin&longCache=true&style=social&label=Connect
 )](https://www.linkedin.com/in/harismuneer)
 
 - [![LinkedIn Link](https://img.shields.io/badge/Connect-hassaanelahi-blue.svg?logo=linkedin&longCache=true&style=social&label=Connect
-)](https://www.linkedin.com/in/hassaan-elahi-108439141/)
+)](https://www.linkedin.com/in/hassaan-elahi/)
 
 
 ## Contributions Welcome
