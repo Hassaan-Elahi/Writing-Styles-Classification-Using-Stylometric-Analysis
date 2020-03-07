@@ -9,22 +9,21 @@
 
 [![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](#)
 [![GitHub Forks](https://img.shields.io/github/forks/harismuneer/Writing-Styles-Classification-Using-Stylometric-Analysis.svg?style=social&label=Fork&maxAge=2592000)](https://www.github.com/harismuneer/Writing-Styles-Classification-Using-Stylometric-Analysis/fork)
-[![Build Status](https://semaphoreapp.com/api/v1/projects/d4cca506-99be-44d2-b19e-176f36ec8cf1/128505/badge.svg)](#)
 [![GitHub Issues](https://img.shields.io/github/issues/harismuneer/Writing-Styles-Classification-Using-Stylometric-Analysis.svg?style=flat&label=Issues&maxAge=2592000)](https://www.github.com/harismuneer/Writing-Styles-Classification-Using-Stylometric-Analysis/issues)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat&label=Contributions&colorA=red&colorB=black	)](#)
 
 
-## Abstract:
+## Abstract
 
 In this project, we have developed **an intelligent system that takes a single document and classifies different writing styles within the document using stylometric analysis**. The classification is done using **K-Means Clustering (an unsupervised machine learning method)**. First, the document is divided into chunks of text using a standard chunk size (a chunk is comprised of some fixed number of sentences). Then for each chunk of text, a vector of **stylometric features** is computed. After that the chunks are clustered using their vectors of stylometric features. Thats where unsupervised machine learning comes into play. **The chunks with same style are clustered together**. Hence, the number of clusters made correspond to the number of different writing styles that the document has. In this approach, the value of K is determined using Elbow Method. We also ran an experiment for a document with two writing styles and our system was successfully able to identify that the document had two different writing styles. Our approach separates out text with same style from that of different style and can be used to detect plagiarism also.
 
-## Background:
+## Background
 
 The study of measurable features of literary style, such as sentence length, readability scores, vocabulary richness and various frequencies (of words, word lengths, word forms, etc.), has been around at least since the middle of the 19th century, and has found numerous practical applications of interesting problems in the modern era of Artificial Intelligence and Machine Learning. **Study of a literary style of a document is called Stylometry.**
 
 Stylometry grew out of earlier techniques of analyzing texts for evidence of authenticity, author identity, and other questions. The development of computers and their capacities for analyzing large quantities of data enhanced this type of effort by orders of magnitude. In the current era of research, Stylometry is widely used in the problems of intrinsic plagiarism detection, genres separation, authorship verifications and authorship attribution, author gender detections and many more. However, the main task is to classify different writing styles from the text, which can further be used to solve above-mentioned problems.
 
-## Introduction:
+## Introduction
 
 **Our system determines variations in writings in a text document. These variations can be due to different authors or different genres of writing for example stories, research papers, dramas play etc.**
 
@@ -32,7 +31,7 @@ Other approaches on **Intrinsic Plagiarism Detection** (essentially different wr
 
 In this report, first we elaborate our whole methodology including the features selection and data preprocessing. It also includes the machine learning method used. After that in order to demonstrate our approach an experiment is run on a document with two different writing styles. The results are explained and some limitations of our work are also presented. At the end we conclude our report.
 
-## Methodology:
+## Methodology
 
 First, the document is divided into chunks of text using a standard chunk size window. Then for each chunk of text a vector of stylometric features is computed. After that the chunks are clustered using their vectors of stylometric features. Thats where unsupervised machine learning comes into play. The chunks with same style are clustered together.
 
@@ -94,7 +93,7 @@ As we are using unsupervised learning approach to cluster our data, we have used
 
 As mentioned earlier, we have calculated almost 20 features. After that K-Means algorithm is run on the vectors of all chunks and centroids are identified. Now at this stage the number of centroids correspond to the number of different writing styles identified and this was what our system was meant to do but in order to visually see those clusters we had to convert our 20 dimensional vector into a 2D vector using Principal Component Analysis which extracted the essence from that 20D vector and converted it into a 2D vector. We then plot these vectors and color those chunks same which were grouped together under a centroid by K-Means. This way the chunks with different styles are visualized further strengthening our results.
  
-## Experimental Settings:
+## Experimental Settings
 
 For the proof of concept, we chose two documents. One is a story named Jim(Story) while the other document is a research paper named AuthAttr(Paper). Now we merge these two documents into one and use that document for experiments. Since, this new document contains two different writing styles (one of a story and one of a research paper) hence, our system should essentially identify that this new document has two writing styles.
 
@@ -150,13 +149,13 @@ A document containing texts with 2 different writing styles (a story and a resea
   <img src="../master/Images/results.jpg"/>
  </p>
  
-## Limitations:
+## Limitations
 
 As PCA smudges the higher dimensional vector into a 2D vector, so there is a high possibility of some loss of significance during the conversion process. Due to this there is a possibility that after plotting the clusters don’t seem distinguishable as expected due to the loss of information while doing PCA. This is not as such a limitation to our system, since our system correctly identifies the number of writing styles through the value of K which is enough to proof the correctness of our approach but if and only if there is a need to visually see those clusters then it is only possible by converting the high dimensional vectors using PCA to a 2D one.
 
 In a scenario where the document is written by a single author, one may assume that in this case there should be only one cluster implying one writing style. However, this is not the case every time. As we know each paragraph written even by the same author has a bit different writing style than its other counterparts like e.g there are some minor differences in lexical features (number of punctuation marks and others). Also there might be a poetry in paragraphs, mathematical equations etc. So our method will create clusters according to the writing style within that document. But the major difference in such a setting is the distance between those clusters. The more different the writing styles are the more far away the clusters are from each other. In the case of a document with the same writing style, even if some clusters are made, the distance between those clusters should be small as compared to the case if the document had really different writing styles. Hence this is the crucial essence which makes our algorithm excel because it not only identifies one part of the story i.e number of writing styles but also shows how different those writings styles are from each otherwhich is implied by the distance between the clusters.
 
-## Conclusion:
+## Conclusion
 
 To sum up:
 
@@ -183,18 +182,22 @@ If you want to cite our work, kindly click the above badge for more information 
 -------------------------------------
 
 ## Authors
+
 You can get in touch with us on our LinkedIn Profiles:
 
-- [![LinkedIn Link](https://img.shields.io/badge/Connect-harismuneer-blue.svg?logo=linkedin&longCache=true&style=social&label=Connect
-)](https://www.linkedin.com/in/harismuneer)
+#### Hassaan Elahi
 
-- [![LinkedIn Link](https://img.shields.io/badge/Connect-hassaanelahi-blue.svg?logo=linkedin&longCache=true&style=social&label=Connect
-)](https://www.linkedin.com/in/hassaan-elahi/)
+[![LinkedIn Link](https://img.shields.io/badge/Connect-Hassaan--Elahi-blue.svg?logo=linkedin&longCache=true&style=social&label=Connect)](https://www.linkedin.com/in/hassaan-elahi/)
 
-follow me on github:
-[![GitHub Follow](https://img.shields.io/badge/Connect-Hassaan--Elahi-blue.svg?logo=Github&longCache=true&style=social&label=Follow)](https://github.com/Hassaan-Elahi)
+You can also follow my GitHub Profile to stay updated about my latest projects: [![GitHub Follow](https://img.shields.io/badge/Connect-Hassaan--Elahi-blue.svg?logo=Github&longCache=true&style=social&label=Follow)](https://github.com/Hassaan-Elahi)
 
+#### Haris Muneer
 
+[![LinkedIn Link](https://img.shields.io/badge/Connect-harismuneer-blue.svg?logo=linkedin&longCache=true&style=social&label=Connect)](https://www.linkedin.com/in/harismuneer)
+
+You can also follow my GitHub Profile to stay updated about my latest projects: [![GitHub Follow](https://img.shields.io/badge/Connect-harismuneer-blue.svg?logo=Github&longCache=true&style=social&label=Follow)](https://github.com/harismuneer)
+
+If you liked the repo then please support it by giving it a star ⭐!
 
 ## Contributions Welcome
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](#)
@@ -211,4 +214,4 @@ If you face any issue, you can create a new issue in the Issues Tab and we will 
 
 The content of this project is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>, and the underlying source code used is licensed under the MIT license. 
 
-Copyright (c) 2018-present, harismuneer, Hassaan-Elahi                                                        
+Copyright (c) 2018-present, Hassaan-Elahi, harismuneer                                                        
