@@ -1,7 +1,7 @@
 
 <p align = "middle">
- <img src="../master/AI-Poster.png"/>
- </p>
+  <img src="../master/AI-Poster.png"/>
+  </p>
  
 # Identifying Different Writing Styles in a Document Intrinsically Using Stylometric Analysis ✍️ 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2538334.svg)](https://doi.org/10.5281/zenodo.2538334)
