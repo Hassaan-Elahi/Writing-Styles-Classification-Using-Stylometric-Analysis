@@ -5,7 +5,7 @@
 ![](https://img.shields.io/github/last-commit/aeonSolutions/AeonLabs--Writing-Styles-Classification-Using-Stylometric-Analysis?style=for-the-badge)
 ![](https://views.whatilearened.today/views/github/aeonSolutions/AeonLabs--Writing-Styles-Classification-Using-Stylometric-Analysis.svg)
 [![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](#)
-[![GitHub Forks](https://img.shields.io/github/forks/harismuneer/Writing-Styles-Classification-Using-Stylometric-Analysis.svg?style=social&label=Fork&maxAge=2592000)](https://www.github.com/harismuneer/Writing-Styles-Classification-Using-Stylometric-Analysis/fork)
+[![GitHub Forks](https://img.shields.io/github/forks/aeonSolutions/AeonLabs--Writing-Styles-Classification-Using-Stylometric-Analysis.svg style=social&label=Fork&maxAge=2592000)](https://www.github.com/aeonSolutions/AeonLabs--Writing-Styles-Classification-Using-Stylometric-Analysis/fork)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat&label=Contributions&colorA=red&colorB=black	)](#)
 [<img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" data-canonical-src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" height="30" />](https://www.buymeacoffee.com/migueltomas)
 <br />
