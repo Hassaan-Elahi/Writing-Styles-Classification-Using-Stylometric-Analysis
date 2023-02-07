@@ -5,7 +5,11 @@
 
 # Disclaimer
 
-This is a ported version to a Jupiter notebook by AeonLabs Solutions: https://github.com/aeonSolutions/AeonLabs--Writing-Styles-Classification-Using-Stylometric-Analysis
+This is a ported version to a Jupiter notebook by AeonLabs Solutions: 
+
+https://github.com/aeonSolutions/AeonLabs--Writing-Styles-Classification-Using-Stylometric-Analysis
+
+<br>
 
 Jupiter notebook code change log:
 
@@ -13,6 +17,7 @@ Jupiter notebook code change log:
 - Notebook loads a MS Word DocX file, converts it to txt, and do Writing style analysis from Hassaan-Elahi 
 
 Original code from Hassaan-Elahi can be found here: 
+
 https://github.com/Hassaan-Elahi/Writing-Styles-Classification-Using-Stylometric-Analysis
 
 # Identifying Different Writing Styles in a Document Intrinsically Using Stylometric Analysis ✍️ 
