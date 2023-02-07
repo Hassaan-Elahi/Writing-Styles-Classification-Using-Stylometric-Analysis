@@ -2,8 +2,6 @@
 
 This is a ported version to a Jupiter notebook by [AeonLabs Solutions](https://github.com/aeonSolutions/AeonLabs--Writing-Styles-Classification-Using-Stylometric-Analysis). 
 
-<br>
-
 Jupiter notebook code change log:
 
 - Running on a X64 Windows Mahine using Anaconda
