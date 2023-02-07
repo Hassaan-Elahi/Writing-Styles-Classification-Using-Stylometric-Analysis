@@ -9,7 +9,6 @@
 
 [![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](#)
 [![GitHub Forks](https://img.shields.io/github/forks/harismuneer/Writing-Styles-Classification-Using-Stylometric-Analysis.svg?style=social&label=Fork&maxAge=2592000)](https://www.github.com/harismuneer/Writing-Styles-Classification-Using-Stylometric-Analysis/fork)
-[![GitHub Issues](https://img.shields.io/github/issues/harismuneer/Writing-Styles-Classification-Using-Stylometric-Analysis.svg?style=flat&label=Issues&maxAge=2592000)](https://www.github.com/harismuneer/Writing-Styles-Classification-Using-Stylometric-Analysis/issues)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat&label=Contributions&colorA=red&colorB=black	)](#)
 
 
@@ -185,6 +184,10 @@ If you want to cite our work, kindly click the above badge for more information 
 
 You can get in touch with us on our LinkedIn Profiles:
 
+#### Miguel Tomas
+
+[![LinkedIn Link](https://img.shields.io/badge/Connect-Miguel--Tomas-blue.svg?logo=linkedin&longCache=true&style=social&label=Connect)](https://www.linkedin.com/in/migueltomas/)
+
 #### Hassaan Elahi
 
 [![LinkedIn Link](https://img.shields.io/badge/Connect-Hassaan--Elahi-blue.svg?logo=linkedin&longCache=true&style=social&label=Connect)](https://www.linkedin.com/in/hassaan-elahi/)
@@ -204,14 +207,10 @@ If you liked the repo then please support it by giving it a star ⭐!
 
 If you find any bug in the code or have any improvements in mind then feel free to generate a pull request.
 
-## Issues
-[![GitHub Issues](https://img.shields.io/github/issues/harismuneer/Writing-Styles-Classification-Using-Stylometric-Analysis.svg?style=flat&label=Issues&maxAge=2592000)](https://www.github.com/harismuneer/Writing-Styles-Classification-Using-Stylometric-Analysis/issues)
-
-If you face any issue, you can create a new issue in the Issues Tab and we will be glad to help you out.
 
 ## License
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a> [![MIT](https://img.shields.io/cocoapods/l/AFNetworking.svg?style=style&label=License&maxAge=2592000)](../master/LICENSE)
 
 The content of this project is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>, and the underlying source code used is licensed under the MIT license. 
 
-Copyright (c) 2018-present, Hassaan-Elahi, harismuneer                                                        
+Copyright (c) 2023-present, Miguel Tomas, Hassaan-Elahi, harismuneer                                                        
