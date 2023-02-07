@@ -2,7 +2,19 @@
 <p align = "middle">
   <img src="../master/AI-Poster.png"/>
   </p>
- 
+
+# Disclaimer
+
+This is a ported version to a Jupiter notebook by AeonLabs Solutions: https://github.com/aeonSolutions/AeonLabs--Writing-Styles-Classification-Using-Stylometric-Analysis
+
+Jupiter notebook code change log:
+
+- Running on a X64 Windows Mahine using Anaconda
+- Notebook loads a MS Word DocX file, converts it to txt, and do Writing style analysis from Hassaan-Elahi 
+
+Original code from Hassaan-Elahi can be found here: 
+https://github.com/Hassaan-Elahi/Writing-Styles-Classification-Using-Stylometric-Analysis
+
 # Identifying Different Writing Styles in a Document Intrinsically Using Stylometric Analysis ✍️ 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2538334.svg)](https://doi.org/10.5281/zenodo.2538334)
 
