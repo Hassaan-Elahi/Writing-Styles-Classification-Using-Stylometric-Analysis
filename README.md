@@ -1,8 +1,3 @@
-
-<p align = "middle">
-  <img src="../master/AI-Poster.png"/>
-  </p>
-
 # Disclaimer
 
 This is a ported version to a Jupiter notebook by AeonLabs Solutions: 
@@ -185,6 +180,10 @@ To sum up:
 
 The heart of our approach is correctly extracting the style from the chunk which is successfully achieved using a mix of different categories of linguistic features like lexical, vocabulary richness and readability scores. Our method is repeated every time for a new document. Since tt identifies the different writing styles in that document, hence our approach can also be used to detect plagiarism.
 
+<p align = "middle">
+  <img src="../master/AI-Poster.png"/>
+</p>
+  
 -------------------------------------
 ## Code
 The complete code for experimentation is also provided. We have open-sourced it to facilitate research in such an exciting domain.
