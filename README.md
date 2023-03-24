@@ -1,16 +1,32 @@
+[![Telegram](https://img.shields.io/badge/join-telegram-blue.svg?style=for-the-badge)](https://t.me/+W4rVVa0_VLEzYmI0)
+ [![WhatsApp](https://img.shields.io/badge/join-whatsapp-green.svg?style=for-the-badge)](https://chat.whatsapp.com/FkNC7u83kuy2QRA5sqjBVg) 
+ [![Donate](https://img.shields.io/badge/donate-$-brown.svg?style=for-the-badge)](http://paypal.me/mtpsilva)
+ [![Say Thanks](https://img.shields.io/badge/Say%20Thanks-!-yellow.svg?style=for-the-badge)](https://saythanks.io/to/mtpsilva)
+![](https://img.shields.io/github/last-commit/aeonSolutions/AeonLabs--Writing-Styles-Classification-Using-Stylometric-Analysis?style=for-the-badge)
+![](https://views.whatilearened.today/views/github/aeonSolutions/AeonLabs--Writing-Styles-Classification-Using-Stylometric-Analysis.svg)
+[![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](#)
+[![GitHub Forks](https://img.shields.io/github/forks/aeonSolutions/AeonLabs--Writing-Styles-Classification-Using-Stylometric-Analysis.svg?style=social&label=Fork&maxAge=2592000)](https://www.github.com/aeonSolutions/AeonLabs--Writing-Styles-Classification-Using-Stylometric-Analysis/fork)
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat&label=Contributions&colorA=red&colorB=black	)](#)
+[<img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" data-canonical-src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" height="30" />](https://www.buymeacoffee.com/migueltomas)
+<br />
 
-<p align = "middle">
-  <img src="../master/AI-Poster.png"/>
-  </p>
- 
+### Disclaimer
+
+This is a ported version to a Jupiter notebook by [AeonLabs Solutions](https://github.com/aeonSolutions/AeonLabs--Writing-Styles-Classification-Using-Stylometric-Analysis). 
+
+Jupiter notebook code change log:
+
+- Running on a X64 Windows Mahine using Anaconda
+- Notebook loads a MS Word DocX file, converts it to txt, and do Writing style analysis from Hassaan-Elahi. Original python code can be found [here](https://github.com/Hassaan-Elahi/Writing-Styles-Classification-Using-Stylometric-Analysis). 
+
+<br>
+
+**Get a Notification on every PCB update**
+
+You can fill in your [mail here (Google form)](https://docs.google.com/forms/d/e/1FAIpQLScErMgQYRdA-umvCjvTPPrCO7Lg1QYowTxb7vfa8cTfrcPEAA/viewform?usp=pp_url) and I'll send a reminder when a new PCB prototype is made available here or a new revision for an existing PCB. Stay tuned!
+
 # Identifying Different Writing Styles in a Document Intrinsically Using Stylometric Analysis ✍️ 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2538334.svg)](https://doi.org/10.5281/zenodo.2538334)
-
-
-[![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](#)
-[![GitHub Forks](https://img.shields.io/github/forks/harismuneer/Writing-Styles-Classification-Using-Stylometric-Analysis.svg?style=social&label=Fork&maxAge=2592000)](https://www.github.com/harismuneer/Writing-Styles-Classification-Using-Stylometric-Analysis/fork)
-[![GitHub Issues](https://img.shields.io/github/issues/harismuneer/Writing-Styles-Classification-Using-Stylometric-Analysis.svg?style=flat&label=Issues&maxAge=2592000)](https://www.github.com/harismuneer/Writing-Styles-Classification-Using-Stylometric-Analysis/issues)
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat&label=Contributions&colorA=red&colorB=black	)](#)
 
 
 ## Abstract
@@ -155,6 +171,14 @@ As PCA smudges the higher dimensional vector into a 2D vector, so there is a hig
 
 In a scenario where the document is written by a single author, one may assume that in this case there should be only one cluster implying one writing style. However, this is not the case every time. As we know each paragraph written even by the same author has a bit different writing style than its other counterparts like e.g there are some minor differences in lexical features (number of punctuation marks and others). Also there might be a poetry in paragraphs, mathematical equations etc. So our method will create clusters according to the writing style within that document. But the major difference in such a setting is the distance between those clusters. The more different the writing styles are the more far away the clusters are from each other. In the case of a document with the same writing style, even if some clusters are made, the distance between those clusters should be small as compared to the case if the document had really different writing styles. Hence this is the crucial essence which makes our algorithm excel because it not only identifies one part of the story i.e number of writing styles but also shows how different those writings styles are from each otherwhich is implied by the distance between the clusters.
 
+<br />
+
+## Q&A WhatsApp/Telegram Groups
+| ![](https://github.com/aeonSolutions/PCB-Prototyping-Catalogue/blob/main/whatsAppTelegram.png) | Subscribe to the WhatsApp or Telegram channel to get latest information about any of this KiCad projects and get help. Or simply like this kind of projects and want to stay updated with the latest research ideas and prototypes during the day and week. [![Telegram](https://img.shields.io/badge/join-telegram-blue.svg?style=for-the-badge)](https://t.me/+W4rVVa0_VLEzYmI0) [![WhatsApp](https://img.shields.io/badge/join-whatsapp-green.svg?style=for-the-badge)](https://chat.whatsapp.com/FkNC7u83kuy2QRA5sqjBVg) |
+|-------------|------|
+
+<br>
+
 ## Conclusion
 
 To sum up:
@@ -169,6 +193,10 @@ To sum up:
 
 The heart of our approach is correctly extracting the style from the chunk which is successfully achieved using a mix of different categories of linguistic features like lexical, vocabulary richness and readability scores. Our method is repeated every time for a new document. Since tt identifies the different writing styles in that document, hence our approach can also be used to detect plagiarism.
 
+<p align = "middle">
+  <img src="../master/AI-Poster.png"/>
+</p>
+  
 -------------------------------------
 ## Code
 The complete code for experimentation is also provided. We have open-sourced it to facilitate research in such an exciting domain.
@@ -184,6 +212,12 @@ If you want to cite our work, kindly click the above badge for more information 
 ## Authors
 
 You can get in touch with us on our LinkedIn Profiles:
+
+#### Miguel Tomas
+
+[![LinkedIn Link](https://img.shields.io/badge/Connect-Miguel--Tomas-blue.svg?logo=linkedin&longCache=true&style=social&label=Connect)](https://www.linkedin.com/in/migueltomas/)
+
+You can also follow my GitHub Profile to stay updated about my latest projects: [![GitHub Follow](https://img.shields.io/badge/Connect-Miguel--Tomas-blue.svg?logo=Github&longCache=true&style=social&label=Follow)](https://github.com/aeonSolutions)
 
 #### Hassaan Elahi
 
@@ -204,14 +238,28 @@ If you liked the repo then please support it by giving it a star ⭐!
 
 If you find any bug in the code or have any improvements in mind then feel free to generate a pull request.
 
-## Issues
-[![GitHub Issues](https://img.shields.io/github/issues/harismuneer/Writing-Styles-Classification-Using-Stylometric-Analysis.svg?style=flat&label=Issues&maxAge=2592000)](https://www.github.com/harismuneer/Writing-Styles-Classification-Using-Stylometric-Analysis/issues)
-
-If you face any issue, you can create a new issue in the Issues Tab and we will be glad to help you out.
 
 ## License
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a> [![MIT](https://img.shields.io/cocoapods/l/AFNetworking.svg?style=style&label=License&maxAge=2592000)](../master/LICENSE)
 
 The content of this project is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>, and the underlying source code used is licensed under the MIT license. 
 
-Copyright (c) 2018-present, Hassaan-Elahi, harismuneer                                                        
+Copyright (c) 2023-present, Miguel Tomas, Hassaan-Elahi, harismuneer     
+
+______________________________________________________________________________________________________________________________
+
+<br />
+<br />
+
+### Be supportive of my dedication and work towards technology education and buy me a cup of coffee
+Buy me a cup of coffee, a slice of pizza or a book to help me study, eat and think new PCB design files.
+
+[<img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" data-canonical-src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" height="50" />](https://www.buymeacoffee.com/migueltomas)
+
+<br />
+<br />
+
+### Make a donation on Paypal
+Make a donation on paypal and get a TAX refund*.
+
+[![](https://github.com/aeonSolutions/PCB-Prototyping-Catalogue/blob/main/paypal_small.png)](http://paypal.me/mtpsilva)
