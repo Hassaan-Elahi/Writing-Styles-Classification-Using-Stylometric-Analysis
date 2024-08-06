@@ -1,0 +1,2567 @@
+A Deep Neural Network for Electrical Resistance Calibration of Self-Sensing Carbon Fiber Polymer Composites Compatible with Edge Computing Structural Monitoring Hardware Electronics
+
+
+
+Miguel Tomás*, Said Jalali2, Kiera Tabatha3
+1,3Department of Computer Sciences, Universidad Alcalá, Madrid, Spain
+
+2Civil Engineering Department, University of Minho, 4800 Guimarães, Portugal
+
+
+
+Article Info
+
+
+
+Abstract
+
+keywords:
+
+A: Carbon Fiber Composites
+
+B: Edge Computing
+
+C: Machine Learning
+
+D: Self-Sensing
+
+E: Stress Relaxation
+
+F: Temperature dependence
+
+
+
+Experimental Data Repository
+
+https://dataverse.harvard.edu/dataverse/selfSensingCarbonfiberComposites 
+
+
+
+The self-sensing ability of materials, in particular carbon fiber polymer composites (SSCFPC), is a must-have requirement when designing a structural monitoring network for remote assessment of structural serviceability.  This work presents a study using an Artificial Deep Neural Network (ADNN) where is evaluated the electrical resistance (R) output of specimens subjected to an unchanged deformation state of 2,86% strain for prolonged periods of time. Six ADNN architectures are evaluated with varying numbers of neurons on pre-defined hidden layers, sharing the same four data inputs and one output. The dataset is based on 3,276 data points collected during the experimental campaign of an innovative electrode design embedded in SSCFPC specimens. The eﬀect of the number of iterations and the architecture of the neural network is investigated in proposed ADNN models. Simple moving average (SMA), and moving Standard Deviation, , are determined and plotted in terms of z-score to assist in performance evaluation of proposed ADNN models. The optimal ADNN architecture is found among six proposed architectures and for each of the four SSCFPC mixtures. Results show the proposed model architectures are able to predict values of R with greater accuracy than traditional regression mathematical methods when traditional statistical coefficients are used. However, when analyzing data in a time-series manner results show further research is needed to achieve optimal accuracy results. The analysis presented focused on the structural monitoring network infrastructure and hardware electronics compatibility for further development of this type of SSCFPC as a self-sensing composite material with ability of automatic calibration and suitable for real-time data acquisition and artificial intelligence modeling.
+
+
+
+Introduction
+
+With the turn of a new millennium, advances in electronics, in particular miniaturization of electronic components, enabled new hardware functionalities to a point of consumer massification. Protagonized in 2007, by the first iPhone with a touch screen, the term “smart” began to be widely used to describe “smart devices” with capabilities to transmit and receive data and perform some kind of action without human intervention. 
+
+During the last decade, with wider adoption of open hardware as a more cost-effective solution to deliver digital transformation, with democratization and availability of electronic components, computing power on smart devices increased in parallel with optimizations for lower power consumption, while at the same time, physical dimensions decreased. Nowadays is possible to design and embed small electronic components directly into a building material or composite and make it an integral part of it. A smart structural element connected to all others with the innovation of being able to send and receive information in a useful and meaningful way.
+
+Smart Cities Monitoring Infrastructure
+
+Edge computing is a term used to define a new way of managing IT resources and infrastructure by moving data selection, processing, and analysis, to a server placed at the edge of the Internet [1], in closer proximity to mobile 
+
+
+
+
+
+Data producer
+
+Data producer
+
+Cloud servers
+
+Cloud Edge server
+
+Cloud Edge server
+
+Local edge server & data endpoint
+
+Local edge server
+
+Local edge server
+
+Data endpoint
+
+Mobile edge server & data endpoint
+
+Data endpoint
+
+Cloud servers
+
+Cloud Edge server
+
+Cloud Edge server
+
+Local edge server & data endpoint
+
+Local edge server
+
+Local edge server
+
+Data endpoint
+
+Mobile edge server & data endpoint
+
+Data endpoint
+
+Figure 1 – Schematic representation of an edge computing network infrastructure 
+
+
+
+devices, if not the mobile device itself. Edge computing devices have the capability of sending and receiving data from sensors connected to Internet of Things (IoT) devices (figure 1). This is of extreme relevance and importance when evaluating influence of Time (and latency) on collected experimental data measurements from any smart structural device. 
+
+Edge computing solutions are primarily set up to deliver low-latency data in smart cities and support emerging applications such as augmented reality, live video transmission, connected and autonomous transportation, smart manufacturing, assisted healthcare, and live data updates. It functions as a place to store data, analyze, and provide results for devices that require large bandwidth [5]. Edge computing solutions are not a static point or a place on a network, instead, can be installed at a particular physical location of interest for a community or industry [2]. Terms such as cloudlets, micro-data centers, and fog have been used in the literature to refer to these types of small edge-located computing hardware [3] [4]. In figure 1, it is schematically illustrated a simplification of how edge computing serves as an intermediary between the data producer and data storage. In that figure, it is possible to see end devices as simple data endpoints, and as data producers when needed. Cloud edge servers, forward data requests made to cloud servers, a service, cloud content, or other, while at the same time be a data provider, performing computational tasks requested from cloud servers. Common tasks include data processing offloading by performing partial analysis on data they hold, serving results instead of the data itself. Cloud Edge servers also have the capability of data storage, caching, and distributing data requests depending on the nodes it connects at any given time. Edge computing’s main advantage is to process a large amount of temporary data and upload only the necessary, greatly reducing network loads and bandwidth usage, and saving processing time on Cloud Servers. Being much closer to data producer devices means it can respond faster with lower latency time. At the end of an edge server, are Internet of Things (IoT) smart devices and “beyond the edge” servers [6]. IoT is a term used to refer to electronic devices commonly known as “things” with the ability to collect and serve as data acquisition devices for transmission over the internet [7].  “IoT devices do not infer reality nor limit or constrain it. Their purpose is one of collecting data, and making it available, with the ultimate goal of facilitating the life of a citizen”. 
+
+In the context of IoT applications, cloud computing architectures present the following challenges:   
+
+1) IoT devices require real-time communication with a lower latency time than those provided by cloud servers. 
+
+2) With an expected growth of connected devices in the upcoming years [8] power expenditure is a crucial factor and a constraint to further development and 
+
+    implementation at a reduced cost of real-time data structural health monitoring solutions. 
+
+
+
+The International Data Corporation (IDC) estimated in 2021 [8], data growth to reach 175 zettabytes (ZB), and overall: 51.4% of data will be generated by IoT devices; 30% of data will be used for consumption in real-time by 2025. Depending on the type of tasks an IoT device is set up to do, data it produces can be delivered to a local mobile device, acting as a local server (see figure 1), or instead connect to a nearby cellular tower using 4G/LTE, for data exchange and for data requests, using machine learning and artificial intelligence. This type of electronic device is characterized by having lower power consumption and reduced physical dimensions. Applications using this type of device can be found in all sectors and businesses [9], such as agriculture, manufacturing, health, transport, security & surveillance, and smart cities [10][11]. 
+
+
+
+Structural Monitoring Network Structure
+
+An important part when implementing a structural monitoring network for live data acquisition is the network structure, i.e., how smart devices connect and relay collected data measurements back to a database (DB), stored on a DB server responsible for managing data on a network. It also requires an authentication server to verify if a new smart device is authorized to access the network and to define access limitations and configuration to use while authenticated in the network. 
+
+There are several solutions available to relay data to a DB server. A monitoring network often includes intermediate gateway devices, that are capable of forwarding data packets between the smart structural composite & device and the network server. Examples of gateways include Ethernet gateways, cellular gateways, and LoraWAN gateways. This work is proposed usage of a Controller Area Network (CAN) as a network for structural monitoring. CAN, is a two-wire (CAN high and CAN low lines), half duplex, high-speed network system, commonly used in embedded systems, and provides fast communication with connected structural electronics for real-time data transmission (figure 3).
+
+Smart Sensing
+
+Anas W. Alhashimi in his thesis work [16] defines the response of a sensor to have linear, multilinear, static, and dynamic among others depending on the input-output expected [15]. For cases of ideal sensors that follow a static linear model [13][14], it can be written as follows:
+
+			(1)
+
+where the parameter  is the sensor’s sensitivity to input and output;  is the value output of the sensor;  is the “true” value measured;   is a parameter obtained for . In real-world applications, due to unforeseen deviations from the ideal characteristics of the sensor, the ideal response  on everyday usage is difficult to achieve. To mitigate this, it is possible to program connected smart data acquisition (DAQ) devices to perform predefined data processing before outputting measurement values, to improve accuracy with respect to the true value. This requires the introduction of additional parameters into the calibration model to assist in post-processing of raw output measurements by the smart DAQ device, everytime it reads from a connected self-sensing composite material [16]. To determine the true value  when performing a measurement (figure 2), Anas W. Alhashimi [16] defines a concept for sensor calibration, a random deviation, , to account for all systemic errors that may occur and are not included individually on the sensor model itself, however can be mathematically determined overall;  is the sensor’s output and  the final calibrated measurement delivered and stored in a database. This research work presents an alternative solution for using Artificial Deep Neural Network (ADNN) to model experimental data measurements directly in the proposed smart DAQ electronics microcontroller (MCU) unit.
+
+
+
+
+
+
+
+
+
+
+
+Sensor
+
+Calibration
+
+
+
+
+
+
+
+
+
+Sensor
+
+Calibration
+
+Figure 2 - A graphical description of Anas W. Alhashimi’s definition of the concept “sensor calibration” [16]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CAN High line
+
+node a
+
+node n
+
+CAN Low line
+
+120Ω
+
+120Ω
+
+node b
+
+CAN controller
+
+CAN transceiver
+
+CAN High line
+
+node a
+
+node n
+
+CAN Low line
+
+120Ω
+
+120Ω
+
+node b
+
+CAN controller
+
+CAN transceiver
+
+Figure 3 - A schematic representation of a Controller Area Network (CAN)
+
+
+
+Proposed PCB electronics hardware
+
+Structural smart, carbon fiber-based, composites can be utilized for automation of Structural Health Monitoring (SHM) and structural self-repair [17][18]. Connected with hardware electronics capable of running more complex  tasks, beyond the simple ability of automatic sensing and calibration, enhance further autonomous sensing ability on this type of structural carbon fiber composite materials.
+
+For this research work, were designed in KiCad, fabricated and prototyped hardware electronics (figure 4), suitable for deployment in the construction industry, capable of local edge server computing tasks such as machine learning and artificial intelligence modeling of live data. Proposed hardware electronics enable connectivity with this kind of self-sensing carbon fiber composites for collection of sensed data measurements and send it as real-time data using the structural monitoring network where is connected. It also has the ability to store locally collected data and perform autonomous real-time decision-making tasks in regard to structural health & serviceability conditions, according to what is programmed by the team of engineers, and firmware embedded in to the smart DAQ electronics.
+
+Hardware electronics specifications (figures 4, table 1) include one Xtensa LX7 microcontroller unit (MCU), a dual core processor unit clocked up to 240MHz, permanent local storage up to 1Gbit of NOR Flash and up to 1Gbit of pseudo memory RAM (pSRAM) suitable for machine learning and artificial intelligence modelling computing. Both capacities can vary according to specific structural monitoring needs for the intended structural monitoring network. 
+
+Network capabilities include connectivity to a Controller Area Network (CAN) (figure 3). An important
+
+
+
+
+
+31 mm
+
+31 mm           
+
+
+
+79 mm
+
+79 mm
+
+CAN network 
+
+Microcontroller
+
+Power managementntroller
+
+CAN network 
+
+Microcontroller
+
+Power managementntroller
+
+
+
+Figure 4 – hardware electronics design layout. To the Left: top side of the hardware electronics; to the right: bottom side of the hardware electronics 
+
+
+
+
+
+Table 1 – Hardware specifications for the proposed smart DAQ
+
+QFN-56 Dual Xtensa LX7 Core Processors running up to 240MHz:
+
+RISC-V ultra-low power co-processor
+
+512Kb RAM plus pSRAM (max 1 Gbit);
+
+16Mb SOIC 8 NOR SPI Flash Memory (max 1Gbit);
+
+2.4GHz ISM wireless connectivity;
+
+Up to 120 12bit ADC Multiplexed DAQ channels;
+
+
+
+Authentication & Security:
+
+SOIC-8 ATSHA204A SHA-256 high-security hardware authentication IC for secure and unique communication between devices;
+
+
+
+2 wire CANBUS
+
+Controller Area Network (CAN) V2.0B implementation using TSSOP-20 MCP2515;
+
+ISO 11898 SOP-8 TJA1050 High-speed transceiver;
+
+
+
+Power management
+
+HiLink AC 85-220V DC 5V 1A voltage rectifier;
+
+SOT23-6 MT3608 constant frequency current mode step-up 5.0V 2.0A DC-DC converter;
+
+DFN-6 AUR9718 high efficiency step-down 3.3V 1.5A DC-DC converter;
+
+SOP-8 TP4056 1S 4.2V 1.0A Lithium Polymer battery management system (BMS); 
+
+
+
+Onboard sensors:
+
+DFN-8 SHT3x temperature sensor with a precision of ±0.2°C;
+
+DFN-8 SHT3x humidity sensor with a precision of ±1.5% RH;
+
+LGA-14 LSM6DS3 6-axis accelerometer and gyroscope;
+
+External connectivity for up to 120 sensors:
+
+2x I2C terminal connectors (shared; Jumper PIN selected)
+
+1x up to 16bit ADC terminal connector (shared; Jumper PIN selected) (oversampling)
+
+1x up to 16bit digital terminal connector (shared; Jumper PIN selected) (oversampling)
+
+
+
+
+
+feature on this type of network architecture is in the ability to have multiple devices connected configured to perform server tasks on the network, allowing continuous uninterrupted serviceability of the structure even in the event of faulty electronics. Installed CAN V2.0B hardware connectivity is made with a TSSOP-20 MCP2515 integrated controller (IC) from Microchip, connected with a 1.0 Mbit high-speed transceiver, a SOP-8 TJA1050 IC from Philips, fully compatible with ISO 11898, able to operate at low DC voltages. Hardware electronics also include connectivity using ISM bands available at 2.4GHz with purpose of enabling wireless connectivity to provide useful data about the structure, to any unknown mobile device passing nearby. 
+
+Cryptographic capabilities onboard, are made on a SOIC-8 ATSHA204A IC from Microchip, able to provide unique sensor data communication using the SHA-256 encryption algorithm. This is a mandatory component with purpose of delivering a unique hash signature on any individual sensor data measurements made, a unique data fingerprint ID, a requirement to deliver real-time sensor data measurements and do data upload to a repository, for instance, Harvard University’s dataverse (http://www.dataverse.org). The unique data fingerprint ID includes specific information about:
+
+the self-sensing structural composites it connects;
+
+the relative location of sensor measurements by means of a timestamp information appended to individual measurements made;
+
+the pcb electronics unique serial ID collecting sensing data measurements;
+
+Onboard hardware sensor components include a MEMS sensor, the LSM6DS3 IC from ST Microelectronics, for 3-axis digital accelerometer and 3-axis digital gyroscope measurements. It has an output data rate (ODR) up to 1.6 kHz and 8 Kbyte FIFO with dynamic allocation of significant data. A CMOS sensor, the SHT3x IC from Sensirion, fully calibrated, linearized, and temperature compensated digital measurements with accuracies of ±1.5 % RH for humidity measurements and ±0.2°C for temperature measurements. These onboard sensors allow the hardware electronics to do self-compensation and self-calibration on measurements made on any of the self-sensing structural composites it connects, to evaluate any systemic errors, , that may occur during measurements.
+
+To power this hardware electronics, there is a 85-220V AC to 5V 1000mA DC voltage rectifier from HiLink. This is the main provider of energy to the electronics and also to the CAN BUS Network, set up to operate at ±5V DC. Furthermore, power management on the electronics include two safety fuses (one AC fuse, and one DC fuse) with the purpose of overvoltage and overcurrent protection. In the event of a power failure and emergency situations, this hardware electronics can be powered using standard 4.2V DC Lithium Polymer Batteries connected to a constant frequency current 5.0V 2000mA DC converter, the SOT23-6 MT3608 from Aerosemi. Battery charging management is done on the SOP-8 TP4056 1S 4.2V 1000mA from NanJing Top Power ASIC Corp. Main onboard electronics components (MCU, ICs) are powered by a high efficiency 3.3V 1500mA DC converter, the DFN-6 AUR9718 from BCD. 
+
+In summary, this hardware is capable of performing the following computing tasks:
+
+collect sensor data measurements from self-sensing, carbon fiber-based, composite elements it connects, and assign a unique data fingerprint ID using SHA-256 algorithm; suitable to operate on any open network environment; 
+
+maintain an always updated database with all devices connected to the network. Retrieve real-time data from other connected devices and send local data measurements to other devices using CAN;
+
+run a real-time local database; perform ML and AI modeling tasks for autonomous & real-time decision-making according to modeling results and predefined setup and configuration; 
+
+connect with nearby unknown devices and send data analytics about usage, serviceability, and health of the structure.  
+
+PCB design was made to fit any universal junction box with dimensions of 80x32mm. In table 1 is a summary of all hardware specifications for the proposed electronics suitable for active structural health monitoring.
+
+Artificial Neural Networks for IoT Applications
+
+Artificial intelligence (AI) and machine learning (ML) are the next step in self-sensing materials toward smartization [19][20] and the Internet of Everything (IoE). Today, AI and ML technologies can be found in a wide variety of knowledge fields, such as environmental engineering [21], structural engineering [22], earth sciences [23], computational mechanics [20], and materials science[24]. Some factors driving this change include increased complexity of algorithms and learning models with growth of computing power per watt and availability of data. Data analysis was, until recently, implemented at the industrial process control level [19], moving statistical modeling tasks to centralized servers where results were stored. This type of system design and architecture could only perform data modeling up to a threshold, limited by the physical hardware resources available. The exponential growth of stored data increased the minimum hardware requirements, and this led to the possibility of new approaches to implement data analytics outside traditional cloud servers.
+
+
+
+3 Machine Learning solutions and Artificial Intelligence in general tend to be opaque: difficult to know why they do what they do or how they work. Explainable Artificial Intelligence tries to address this by developing analytic techniques to make opaque computing systems solutions transparent and open data friendly.
+
+3 Machine Learning solutions and Artificial Intelligence in general tend to be opaque: difficult to know why they do what they do or how they work. Explainable Artificial Intelligence tries to address this by developing analytic techniques to make opaque computing systems solutions transparent and open data friendly.AI and ML modeling enable one to overcome the data size limit while taking advantage of increased computational power and provide statistical tools for multidimensional patterning, classification, and clustering.  In the specific area of self-sensing carbon fiber composites, ML tasks can assist in inferring quality of measured data, with vector data characterization and classification, for a specific self-sensing composite element in a structure. These semi-automated or even fully automated tasks are of great importance when dealing with environments and real-time data monitoring, such as the case of a technological upgrade on an industrial manufacturing plant. Moreover, it has been proven to provide an advantage that facilitates faster transfer from a laboratory idea to industrial production and application [20]; allows one to perform real-time characterization [26] of fault/anomaly detection[19][20][27][28] and do component benchmarking [20][28].
+
+Many research studies have been published using artificial intelligence technologies. Luisa Völtz et al. [29] utilized artificial intelligence algorithms to study carbon fiber damage in epoxy composites; Georgios Konstantopoulos et al. [30] presented a study on “nanoindentation mapping data processed with machine learning classification models to identify interfacial reinforcement in carbon fiber composites”; Daniel Sammons et al. [31] investigated the use of convolutional neural networks for non-destructive evaluation of delamination in carbon fiber composites using image data obtained from X-ray computed tomography; Hassan H. et al. present a study [32] on determining the precise damage shape in self-sensing composites using electrical impedance tomography and genetic algorithms. Another relevant research work by Hassan H. et al. [33] is on failure prediction in self-sensing nanocomposites using genetic algorithms and piezoresistance inversion.
+
+When looking for a model to describe a specific dataset, the best approach, is to utilize semi-automated solutions with a wide range of ML algorithms available to assist in modeling real-world classification and regression tasks. For instance, a decision tree algorithm is an example of a classification algorithm [32] suitable for ML tasks. This research work is related to regression tasks and utilizes a model part of the known black-box models3, such as support vector machines (SVM) and artificial neural networks (ANN). This type of data modeling is able to identify unseen and complex patterns beyond conventional linear regression modeling and with higher accuracy [36][37][38][39]. 
+
+ANN introduce the concept of adaptive weights to establish connections between (hidden) layers [37] making this algorithm more suitable to digest huge amounts of data with improved prediction metrics [33]. Deep learning, also known as deep structured learning, is an ANN part of ML algorithms with learning capability. Multilayered feedforward backpropagation is a supervised learning algorithm frequently found when doing automation modeling of collected data, part of deep learning algorithms. A popular learning method due to its ability to be modeled with different network architectures, with excellent predictive performance. 
+
+Past research works on carbon materials using Deep Learning algorithms include “characterizing fracture stress of defective graphene samples using shallow and deep artificial neural networks”[40] and “deep learning stress of defective graphene specimens using shallow approach for determining the chiral indices of carbon nanotubes from high-resolution transmission electron microscopy images”[41] among many others.
+
+Training an ANN model is subjective to patterns and observations identified on measured collected data, meaning prediction efficiency is most likely to suffer with new data. Moreover, hyperparameter tuning is another key task during the modeling process and one that significantly affects predictive ability [36] of a model. The task of a neural network is to find weights and biases, according to the initial optimization parameters defined, minimizing the error between the actual output,, and predicted output,  using a function based on the delta rule. The precision of an ANN depends on the number of iterations, the network topology (number of layers and neurons), learning rate, dropout rate [19] [34] [36] among many other parameters defined according to studies and fields of knowledge. 
+
+To the best of the author’s knowledge, there are limited studies proposing ANN models, to automate R calibration measurements, in carbon fiber composites with self-sensing capability when undergoing an invariable deformation () for prolonged periods of time. Previous studies on this same experimental campaign focused on modeling results, and analysis, of strain behavior when specimens are submitted to triangular loading, and unloading conditions, and evaluated strain sensitivity, here, in “piezoresistivity in micro carbon fiber silicone composites for electrical resistance to strain sensing” [13]. It was also analyzed the behavior when specimens were submitted to a constant deformation state (), for prolonged periods of time, for evaluation of strain relaxation and strain sensitivity during relaxation in “Creep evaluation and temperature dependence in self-sensing micro carbon polymer-based composites for further development as an Internet of Things Sensor device” [14]. 
+
+In this study, a ML model, based on a backpropagation ANN algorithm, is developed within mind integration with smart devices for SHM. The main objective is to model calibration curves needed to establish a successful correlation between R measurements and strain states in a self-sensing carbon fiber composite during a steady state of deformation (). A database containing 3,276 experimental results was utilized and fed into the selected ML models.  
+
+Artificial Neural Network Model and Study Methodology
+
+The type of neural network algorithm, selected on this work to model experimental data, uses a set of input values X and output Y values. In an artificial neural network, an activation function is utilized, , to perform non-linear transformation of input values required to do modeling of complex tasks. The activation function of a node (or neuron) can be determined as follows:
+
+			(2)
+
+where  is the weight on node  and  the input data value. During the training process, a common performance function, such as the mean square error (MSE), is used to calculate the distance between the real and predicted data. A vector of  predictions is generated from a sample of  data points from all X variables,  is a 1D vector of observed values of the variable being predicted, and  a 1D vector with predicted values. The mean square error (MSE) of the predictor is computed as follows:
+
+		  	(3)
+
+where  is the output data value at position  on the  vector, and  the predicted output value.The Gradient descent is an optimization algorithm that optimizes loss by updating weights on the network nodes by an amount 
+
+proportional to the negative gradient.
+
+
+
+
+
+Algorithm 1 - Pseudocode (simplified) for the algorithm utilized in the artificial deep neural network
+
+Assign all network inputs and output 
+
+Initialize all weights with small random numbers
+(between -1 and 1)
+
+Model data as follows:
+
+repeat 
+
+  for every batch in the training set
+
+    propagate the input forward through the network.
+
+ for each layer in the network 
+
+   for every node in the layer
+
+        1. Calculate the weighted sum of the inputs to the node. 
+
+          
+
+        2. Calculate the activation for the node 
+
+            
+
+    end 
+
+     compute the output for each node in the layer
+
+  
+
+ end 
+
+     computation of adaptive learning rates;
+
+ for all hidden layers
+
+      for every node in the layer 
+
+         update gradient parameter
+
+            
+
+      end 
+
+    end
+
+ Calculate the loss function 
+
+    
+
+  end 
+
+while ((current iteration <= max. iterations)
+
+  and (error is > max. allowed error))
+
+
+
+It maintains a single optimization algorithm that can be used instead of the classical stochastic gradient descent to update the network weights, iteratively, based on training data.  To update the gradient parameter, the following equation is used:
+
+			(4)
+
+where is the learning rate;   the gradient mean at node . 
+
+A loss function in a neural network measures the deviation of the estimated values from the values of the experimental data. Is commonly used as loss function the MSE (eq.3): 
+
+			(5)
+
+where  is the loss. The process is repeated until the minimization of the error satisfies initially specified conditions (see Algorithm 1). The pseudo-code above shows the algorithm steps to model experimental data from an input dataset. The training process can be defined as follows: 
+
+Feed-forward of the input data pattern;
+
+Calculation and back-propagation of the error;
+
+Adjustment of weights in the network;
+
+In this study, the number of iterations and architecture of the neural network is investigated. Overall performance of machine learning model results is determined using traditional statistical indicators, such as MSE, MAE, and r2, to analyze and assist in the validation process of the model and selection of network architecture (see section 3.4). Experimental data logged has time dependency, and therefore, is calculated a simple moving average (SMA) and a moving Standard Deviation,  to assess accuracy of modeled results considering data as time-series experimental data (see section 3.4).
+
+Database Collection and Preparation.
+
+Change in electrical resistance (R) can be explained by many factors, namely, carbon fiber content, length, and temperature of the surrounding environment. In this research work, 3,276 data entries were used from collected experimental measured data, 80% of it used to train proposed ANN models. The remainder 20% to test trained ANN models. To model experimental data, first is prepared and aggregated into a common database (X1, X2, X3, X4, Y) (see table 2). The input parameters for the ANN model are: the constant deformation time (X1); the diameter to length ratio of the carbon fiber (X2); the volume fraction of the fiber (X3); and the environment temperature (X4). The output Y, a 1D vector, is the relative amplitude of the electrical resistance,. 
+
+
+
+
+
+Table 2 – Inputs and outputs for the neural network in this study
+
+Variables
+
+Task
+
+Symbol
+
+Units
+
+
+
+
+
+
+
+
+
+Time
+
+Input
+
+X1
+
+days
+
+Carbon fibers 
+ diameter to length ratio 
+
+Input
+
+X2
+
+--
+
+Fiber volume fraction
+
+
+Input
+
+X3
+
+m3/m3
+
+Temperature
+
+Input
+
+X4
+
+
+
+
+
+Output
+
+
+
+--
+
+
+
+Table 2 details the symbol, unit, and task, of four input variables and one output variable. 
+
+It is known ANN algorithms to perform best when data is scaled to [0;1] range, resulting in lower errors during modeling of experimental data[52]. This numerical abstraction allows, and ensures ANN modeling, to target functional generalization of the model’s output results. Scaling and generalization of experimental data can be achieved by performing data transformation using the following equation:
+
+			(6)
+
+where  and  are the maximum and minimum values for the considered variable X and  is the normalized value of the variable . In figure 7 is plotted the experimental data, from measurements of  outputs during 7 days, of an invariable strain deformation () imposed to specimens, and utilized as input for modeling selected ANN.  In the same figure is also plotted, along experimental data, a simple moving average (SMA, see eq.13) to analyze graphically from a different time-scale perspective.
+
+Experimental Work
+
+Carbon fiber composites have proven advantages over more traditional materials. Part of multifunctional structural materials, carbon fiber composites have a property that differentiates them from others, the self-sensing ability to sense, for instance, strain, stress, damage, or temperature, when connected to smart DAQ IoT devices while part of an active monitoring network. 
+
+Technology advances in remote inspection and monitoring of structures, using this kind of self-sensing composites with embedded short carbon fiber (SCF), are on the ability to enable remote DAQ of electrical resistance (R) measurements, on a particular SCF composite, for nondestructive, nonintrusive inspection. Data provided by these structural SCF composites  with self-sensing capabilities can be stored in any open access database, and used in any kind of analysis to assess risk, health and serviceability of structures.
+
+The carbon fiber composite presented here are made of SCF with known length, diameter, and conductive properties that change in accordance with the deformation state of the composite, at any given time, during operation on the intended structural function [12]. Research works on the R behavior of this kind of self-sensing SCF composites have shown the weight ratio of micro-carbon fibers (wt.%) present in the composite matrix, to produce changes in the sensing ability in such a way that a mathematical correlation can be made. A previous analysis published here [13] on results produced by this same experimental campaign has shown, for specimens with %wt up to 13%, measurement outputs to decrease linearly when an axial deformation strain is applied.  For higher SCF %wt content greater than 40% an inverted correlation was identified. 
+
+Stress-strain deformation modeling of this type of self-sensing carbon-based composites can be found in the literature of the specialty. Studies that include the effects of thermal stress [13] [42] and also the effects of stress relaxation are still scarce to author’s knowledge. This study uses the same second iteration of prototyped specimens tested and evaluated in previous research works. The main objective of this study is not to find a classic mathematical model, this was done previously here [16] but rather step into nonlinear mathematics in a search for new ways to evaluate CF based polymer composites’ sensitivity and calibration while connected to advanced microprocessor electronics capable of artificial intelligence tasks.
+
+
+
+
+
+
+
+
+
+Table 3 – Properties of carbon fibers utilized
+
+Tensile Strength 
+
+670 MPa
+
+Tensile Modulus
+
+30 GPa
+
+Fiber Diameter
+
+20.7m 
+
+Carbon Content
+
+min 95%
+
+Type of Fiber
+
+Unidirectional
+
+Electrical resistivity
+
+150 m.m 
+
+
+Table 4 - Electrical resistivity values for specimens studied with different and wt.% of fibers
+
+Carbon fiber diameter-length ratio
+
+
+
+Concentration 
+(% in weight)
+
+
+Fiber volume fraction (m3 / m3)
+
+Electrical resistivity (.m)
+
+
+
+
+
+
+
+
+
+0,013
+
+5
+
+0,023
+
+12±1
+
+
+
+13
+
+0,060
+
+0,56±0,04
+
+0,066
+
+40
+
+0,184
+
+11±3,54
+
+
+
+50
+
+0,230
+
+11±1,5
+
+
+
+
+
+
+
+
+
+
+
+
+
+External axial loading
+
+
+
+External axial loading
+
+
+
+50 mm
+
+embedded carbon fibers
+
+50 mm
+
+embedded carbon fibers 
+
+Acquisition measurement wires
+
+Electrodes
+(thin steel wire wool)
+
+10 mm
+
+10 mm
+
+50 mm
+
+Acquisition measurement wires
+
+Electrodes
+(thin steel wire wool)
+
+10 mm
+
+10 mm
+
+50 mm
+
+Figure 5- Schematic illustration of a composite specimen
+
+
+
+
+
+
+
+
+
+Figure 6 - Photo of an ; wt.%=50
+
+ specimen
+
+
+
+Specimen Fabrication Procedure 
+
+On this experimental campaign, specimens were manufactured using unidirectional short carbon fibers from the enterprise Kureha Chemicals Co, referenced by KFC 100-T (table 3). To manufacture the composite mixture was added an elastomer polymer commercialized 
+
+by the enterprise Dow Corning, referenced as Silastic 145. Mixing procedure followed instructions provided by Dow Corning for both base polymer and catalyst. Fabrication procedure was the same for all specimens molded into 44x70 mm cylindrical molds and cured for 24h in an oven at 40°C 1atm.
+
+
+
+Electrode Design and Fabrication Procedure 
+
+To enable measurements of  on specimens it was necessary to add a specially designed electrode made of a very thin steel wire wool, with 1.0 gr weight. Electrodes were installed during the fabrication procedure, in the molding phase, placing each electrode 10 mm deep on both surfaces along the Y-axis (Figure 5, 6). After curing, and during demolding, was soldered to each electrode using lead-free solder, a 2.0 mm copper wire compatible with the DAQ device utilized for logging of results. Design considerations for fabrication of the specimen’s electrode, embedded into the composite matrix, include maximization of the number of contact points with embedded carbon fibers, durability during successive stress/strain loading requests, and improved thermal behavior compatibility [13] as it allows deformation in tandem with the composite’s matrix. 
+
+For real life applications of active structural health monitoring on building construction, acquisition measurement wires (figure 5, 6), the two 2.0 mm copper wires are suitable to be connected to proposed smart PCB electronics (figure 4). Connectivity is made by screwing the two wires into the corresponding terminal socket available on the PCB for analog to digital data measurements.
+
+Direct current (DC) was selected to analyze R measurements, using the two-probe technique for measurements, along the Y-axis of the specimen where deformation was to be applied, distanced 40 mm apart before any imposed deformation. The two-probe method is suitable due to reduced dimensions of specimens tested and also reduced volumetric ohmic resistance (figure 7).  The laboratory data logger utilized was an Agilent 3970A connected to an Intel x86 computer through RS232 serial communication.  It has an operating measurement time of less than one second, requires an output test current of 1mA, and neglectable ohmic heating during operation. Four mixtures were prepared, each with different percentages of fiber content weight, divided according to fiber diameter to length ratio, : 
+
+0,013; carbon fiber percentages of 5% and 13%.
+
+0,066; carbon fiber percentages of 40% and 50%.
+
+The volume fraction of micro carbon fibers in each composite specimen is shown in table 4, among other properties.
+
+R Response due to an External Mechanical Load
+
+Research elsewhere in the literature regarding R behavior of this type and even a similar type of carbon- based composites shows when subjected to any external load or deformation [41][42] it correlates well for triangular loading environments.  
+
+
+
+  
+
+
+
+ 
+
+ Figure 7 – Results of the experimental data fed into the ANN models at 2.86% constant strain deformation; one sample of each composite mix. plotted with  , ;  Top left:  ; wt.%=5; Top right:  ; wt.%=13; Bottom left:  ; wt.%=40; Bottom right:  ; wt.%=50
+
+
+
+
+
+To evaluate R variations,  is found in literature determined as the difference between initial electrical  resistance,  at the beginning of a test, with measurements of  at any deformation state for a given time. Consider Hooke’s law, the fractional change  can be related with the applied deformation as follows:
+
+		(7)
+
+where S is the strain sensitivity of the specimen,  is the deformation state.
+
+The stress relaxation effect is particularly important on this kind of self-sensing composites. Polymer-based materials are known for their intrinsic creep phenomena, altering the rearrangement of carbon fibers in the matrix of the composite, which translates into a change in the R behavior without a corresponding change in deformation. In everyday use, this type of structural composite materials may be in a constant, unchanged state for prolonged periods of time. To evaluate specimens stress relaxation, were tested by imposing an axial deformation of 2 mm (2.86% strain) for 7 consecutive days (figure 7). 
+
+Viscoelastic response as a result of temperature change
+
+A brief explanation of temperature dependence on this type of SCF polymer composites is presented next. For a more detailed explanation, see previously published work [14] for this same experimental campaign. 
+
+The phenomenology of viscoelastic response due to temperature has been presented for many materials, namely, polymers with low melting points. The influence of thermal expansion on electrical resistance measurements was shown here [49] to be an important factor to consider when using this type of composite matrix. This is important to understand because it influences the R behavior of this type of carbon-based composites.
+
+In polymeric composites, viscoelasticity is defined as a thermally activated process, best defined by an Arrhenius equation [47] to describe the movement of atomic or molecular processes over an energy barrier. Can formulated as follows:
+
+			(8)
+
+
+
+Figure 8 – Curve of temperature change in specimens during relaxation testing.
+
+where  is the phase angle between stress and strain,  is the material frequency,  is the absolute temperature in Kelvin (K),  is the apparent activation energy,  is the Boltzmann’s constant. Literature [47] also defines a horizontal shift factor,  to evaluate the state of a polymer composite due to temperature change:
+
+
+
+		(9)
+
+
+
+ is the reference temperature; constants  and  depends on the physical characteristics of the polymer in the analysis. Previous analysis of results published here [14] shows this type of carbon-based self-sensing composite materials to have a strong correlation between R measurements and surrounding temperature measurements. When temperature loading is applied the polymeric matrix, alter rearrangement of neighboring SCF, and this translates into an increase of electrical resistance for the temperature range [263.15; 313.15]°K. Observed differences are due to the nature and characteristics of the composite matrix, in particular carbon fiber content. The temperature curve recorded during experimental campaign can be seen in figure 8, and is used as an input data parameter when modeling proposed ANN architectures.
+
+Configuration of the ANN 
+
+An ANN with a hidden layer has been demonstrated to simulate very complex non-linear functions [53].  However, when back propagating iteration results of the gradient descent algorithm using Widrow–Hoﬀ arithmetic, is known to have a slow convergence rate [54].  In a backpropagation neural network, the architecture 
+
+
+
+
+
+.
+
+.
+
+
+
+X2
+
+X3
+
+X1
+
+X4
+
+.
+
+.
+
+
+
+y
+
+Input layer
+
+Hidden layers
+
+Output layer
+
+.
+
+.
+
+
+
+.
+
+.
+
+
+
+.
+
+.
+
+
+
+.
+
+.
+
+
+
+X2
+
+X3
+
+X1
+
+X4
+
+.
+
+.
+
+
+
+y
+
+Input layer
+
+Hidden layers
+
+Output layer
+
+.
+
+.
+
+
+
+.
+
+.
+
+
+
+.
+
+.
+
+
+
+Figure 9 – Graph of the ANN architecture used in this study
+
+defines whether the number of training iterations is small or large [55][56]. Another hyperparameter with a significant effect on the generalization accuracy [57][58] is the number of iterations when training the network.
+
+In this study, the impact of training iterations on an ANN model is analyzed using the Adam optimization algorithm. The number of iterations was made to vary from 10 to 1800, with a step of 100 in the interval [100; 600] and step 200 in the interval ]600;1800]. Below 100, iterations of 10, 30, 50, and 80 were used to do modeling.
+
+The selected neural network architecture has five hidden layers (figure 9), and the number of hidden neurons in each layer varied from 5 to 200 (figure 9, table 5). To model each neural network architecture was used the following learning rate values of 0.0, 0.0001, 0.0005, 0.001, 0.005, 0.01, 0.05, 0.1, 0.5. The batch size fed into the training model was 2, 10, 30, 50, 100, 250. Initial modelling tests show this model achitecture selection enabled a more detailed assessment on the number of hidden neurons needed to optimize model accuracy. 
+
+
+
+Table 5 – Neural Network Architectures
+
+Inputs
+
+Outputs
+
+
+Hidden Layers
+& number of neurons
+
+
+
+
+
+
+
+4
+
+1
+
+5-10-20-10-5
+
+4
+
+1
+
+10-20-40-20-10
+
+4
+
+1
+
+15-25-50-25-15
+
+4
+
+1
+
+20-40-80-40-20
+
+4
+
+1
+
+25-50-100-50-25
+
+4
+
+1
+
+50-100-200-100-50
+
+
+
+Furthermore, selection of an ANN architecture allowed assessment of  time dependency in experimental data in a non-linear, nonsequerntial analysis. Table 5 shows the neural network architectures tested and the corresponding configuration.
+
+In this work, modeling of proposed ANN architectures was done on an Intel I7-5557U CPU with a clock speed of 3.1Ghz and 16Gb of RAM. To write proposed artificial neural network architectures in computer code was selected Python language running the latest Windows 11 operating system. Python language has the advantage over other languages because of its open-source support, with more than enough availability of open-source libraries ready to deploy and prototype ANN architectures. Other languages are also suitable, namely the R language and C++.
+
+Performance Indicators. 
+
+To evaluate predicted output errors and performance of proposed model architectures, the following performance indicators were used. 
+
+The mean Absolute Error (MAE) represents the diﬀerence between the experimental input data and predicted output values of the model, determined by averaging the absolute diﬀerence, , over the chosen dataset[59][60]:
+
+		 	(10)
+
+The mean square error (MSE) is the error rate presented in eq. 3 and reproduced here again:
+
+		 	(11)
+
+The Pearson's correlation coeﬃcient (r) is an important indicator when performing a regression analysis [56] [57]. The r-index represents the correlation between predicted output results and values of the real experimental data. This coefficient varies from -1 to 1, closer the absolute value of r is to 1, better the model performs:
+
+		 	(12)
+
+where and  are the predicted value and the average predicted value, calculated from the iteration prediction values. 
+
+Performance indicators mentioned earlier are recurrent in literature when analyzing experimental data and are good to assess the overall performance on the analysis made. When evaluated as global indicators, they tend to hide useful details about performance of the models, in particular, when data has the time attribute, disregarding changes in performance over smaller time intervals for the period considered in the analysis.
+
+When working with time-dependent experimental variables, statistical parameters defined are not best suited to maximize accuracy while modeling experimental data. A moving average is frequently found in time-series data analysis as a way to highlight long-term trend and smooth short-term variations in experimental data. A simple moving average () can be formulated as the unweighted mean of the k data points taken from an equal number of data points on either side of a central value. This ensures that variations in the mean are aligned with the variations in the data.  Consider a dataset containing  entries with  data-points. The mean over the last k data-points is denoted as 
+
+			(13)
+
+where is the data point value;  is the number of periods, in this work experimental data was collected every 60 seconds, which translates into a . This performance indicator is of special relevance in identification of latency effects when requesting measured data using DAQ smart devices (see section 3.4) connected to a structural moniotoring network.
+
+A Moving Standard Deviation, , was determined, relative to  to gain a clear view of what data points, and where, fall outside the predefined probability considering a normal distribution, outside the interval ]. The upper boundary () limit is defined as:
+
+			(14)
+
+The lower boundary () limit is defined as:
+
+			(15)
+
+where  is the number of standard deviations above and below  ,  is also known in statistics as z-score. Is expected 68% of all experimental data to fall within  standard deviation around an average value; 95% within  standard deviations and 99% within  standard deviations (see section 3.4). Moving Standard Deviation, , can be used to measure the spread of a corresponding average value determined for the experimental data collected:
+
+		(16)
+
+experimental data where the standard deviation is small, means the existence of low variance in the data with data points dispersed close to the average value. A higher standard deviation means the existence of a higher variance in the experimental data, and data points are dispersed far from the average value. In cases where the experimental data move outside the moving standard deviation (), data points are considered outliers, and it is important to analyze their meanings within the overall experiment and setup.
+
+Results and Discussion
+
+In this section, the performance results of modeled ANN architectures are presented by optimizing each neuron node weight parameter using backpropagation. To fine-tune performance results, hyperparameters were made to vary (see figure 9):
+
+the ANN network architecture;
+
+the number of hidden layers;
+
+the number of neurons on each layer; 
+
+ANN networks are able to model any kind of data, and modeling requires a specific network architecture for optimal accuracy of modeled results [55] [58]. When the number of inputs and outputs is fixed, the undefined architecture parameters are, the number of the hidden 
+
+
+
+
+
+
+
+Table 6 - Optimal number of iterations for each network architecture (optimal values, , are highlighted)
+
+ 
+
+ wt.%=5
+
+ wt.%=13
+
+ wt.%=40
+
+ wt.%=50
+
+
+
+all data
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[5-10-20-10-5]
+
+500
+
+500
+
+400
+
+_200_
+
+ 
+
+200
+
+[10-20-40-20-10]
+
+1000
+
+500
+
+500
+
+200
+
+ 
+
+800
+
+[15-25-50-25-15]
+
+_1000_
+
+500
+
+1600
+
+200
+
+ 
+
+1600
+
+[20-40-80-40-20]
+
+800
+
+500
+
+600
+
+100
+
+ 
+
+1000
+
+[25-50-100-50-25]
+
+1000
+
+_600_
+
+_800_
+
+100
+
+ 
+
+_1200_
+
+[50-100-200-100-50]
+
+800
+
+400
+
+800
+
+100
+
+ 
+
+800
+
+Minimum value (Eq.18)
+
+500
+
+400
+
+400
+
+100
+
+ 
+
+200
+
+
+
+layers, and the number of neurons on each hidden layer. See table 5 with a selection of architectures used on this study.
+
+Analysis of the Number of Iterations. 
+
+The database used in performance assessment corresponds to the test data. Values estimated by the proposed model were compared with those collected experimentally. Figure 10 depicts regression approximation values, r2 for each model trained with the set of a number of iterations indicated previously. r2 results are shown for each training run of up to 300 iterations (figure 10). From 300 to 1800 results are presented in figure 11 expressed in  between model runs and with a subsequent higher number of iterations, defined as follows: 
+
+			(17)
+
+where  is r2 at run  and  is r2 at run , each run corresponds to a pre-defined number of iterations from 10 to 1800. Another parameter utilized for assessment of the optimal number of iterations is defined as the maximum r2 for all iterations truncated to two decimals:
+
+			(18)
+
+Overall, table 6, lists the minimum number of iterations, , necessary on each network architecture for the achievement of optimal neural network configuration, capable of producing the best prediction results with variations in r2 less than the values presented in table 7, i.e., between the minimum listed on table 6 and the maximum number of iterations of 1800. A brief explanation of the data can be given. For instance, for specimens  wt.%=5 the network configuration of [5-10-20-10-5] is capable of producing the best R predictions with the lowest number of iterations of 500 and has a variation above 500,   , of 0,0002. Another example, for specimens  wt.%=50 the optimal network configuration is [5-10-20-10-5] and requires a minimum number of 200 iterations to model experimental data and has a variation above 200,  , of 0,0061 (table 6; figure 11). 
+
+
+
+Table 7 – Variation of r2 for each network architecture; r2max;min (table 5) 
+
+ 
+
+ 
+wt.%=5
+
+
+ wt.%=13
+
+ 
+wt.%=40
+
+
+ wt.%=50
+
+
+
+all data
+
+ 
+
+r2
+
+
+
+r2
+
+
+
+r2
+
+
+
+r2
+
+
+
+
+
+r2
+
+
+
+[5-10-20-10-5]
+
+0.9863
+
+0.0002
+
+0.9940
+
+0.0000
+
+0.9876
+
+0.0073
+
+0.9766
+
+0.0061
+
+
+
+0.9494
+
+0.0091
+
+[10-20-40-20-10]
+
+0.9862
+
+0.0054
+
+0.9971
+
+0.0068
+
+0.9912
+
+0.0006
+
+0.9775
+
+0.0057
+
+
+
+0.9723
+
+0.0000
+
+[15-25-50-25-15]
+
+0.9867
+
+0.0012
+
+0.9952
+
+0.0013
+
+0.9911
+
+0.0000
+
+0.9745
+
+0.0041
+
+
+
+0.9389
+
+0.0000
+
+[20-40-80-40-20]
+
+0.9825
+
+0.0020
+
+0.9988
+
+0.0040
+
+0.9921
+
+0.0000
+
+0.9770
+
+0.0000
+
+
+
+0.9352
+
+0.0034
+
+[25-50-100-50-25]
+
+0.9788
+
+0.0009
+
+0.9972
+
+0.0038
+
+0.9922
+
+0.0004
+
+0.9755
+
+0.0038
+
+
+
+0.9716
+
+0.0061
+
+[50-100-200-100-50]
+
+0.9841
+
+0.0057
+
+0.9984
+
+0.0059
+
+0.9918
+
+0.0000
+
+0.9743
+
+0.0042
+
+
+
+0.9587
+
+0.0000
+
+
+
+
+
+
+
+
+
+	 	
+
+Figure 10 – r2 results for all network architectures for iterations between 10 and 300 
+
+Top left  ; wt.%=5; top right  ; wt.%=13; bottom left  ; wt.%=40; bottom right  ; wt.%=50
+
+
+
+
+
+After modeling the individual dataset for each composite mixture, was fed into the ANN all 4 datasets at the same time. The results are shown in table 6 and table 7 in the column “all data”. Modeling results show the minimum optimal number of iterations is 200 (table 6). In regard to accuracy change observed for a higher number of iterations  is 0.0091.
+
+Analysis of Variability on Model Outputs. 
+
+In this section, an evaluation of each model output variability is presented. Modeling was repeated 100 times, assumed to be a sufficiently large enough number for the decimal precision required in this study, without any configuration changes, with the objective of assessing randomness of modeling outputs. Algorithmic-wise, modeling cache and variable history was flushed and reset on each new repeated modeling. The database used on this analysis to model outputs on each ANN architecture, is the same as previously used, the test data. 
+
+Globally, the maximum change in r2 between ANN architectures was found to be 0,16 for iterations greater than 10. Overall, observed r2 variability decreases in a trend of a power function inverse to the number of iterations to 1800 (figure 11). To better understand this analysis when modeling a neural network, consider for a moment, to be fully implemented on an IoT data acquisition device, reading R values from a self-sensing composite as presented here. The following example will better illustrate the precision when dealing with automation evaluation of measurement outputs: Consider at a given moment in time, a self-sensing structural composite enters a relaxation stage and the monitoring system makes a measurement request, reading an   on a hypothetical structural composite with wt.%=13 SCF content. The predicted calibration curve varies, r21800;400, 0,0068 or, in Ohm units, from [99,32; 100,68]. Applying Eq.7, and equating  at  equal to 24,16 [14] it is possible to determine the predicted deformation strain to vary from [2,8319; 2,888]% or in millimeters, a variability of 1,407x10-2 mm or [1,9859; 2,0141] mm (0.705%) in the predicted deformation output.
+
+
+
+
+
+
+
+
+
+
+
+
+
+	 
+
+Figure 11 –  observed between ANN architectures for the same number of iterations selection 
+top left:  ; wt.%=5; top right:  ; wt.%=13; bottom left:  ; wt.%=40; bottom right:  ; wt.%=50
+
+
+
+Selection of a Neural Network Architecture 
+
+In computational terms, the model architecture is an important factor to consider when selecting one to predict provided experimental data. A too complex model will translate into additional time allocated of CPU resources to train and model the neural network, with marginal or even no additional gain on the accuracy of results. In contrast, a too simple model will result in a decrease in accuracy and a lower performance on predicted R outputs.
+
+When dealing with IoT devices, power consumption is a crucial factor to take into consideration when part of a structural monitoring system, in particular battery-powered wireless sensor devices. This section evaluates the optimal neural network architecture for each composite mixture tested and selects one, according to the bias and variance parameters, as stated in the following paragraphs.  The results are summarized in table 8.
+
+ Training of an ANN is considered to be finished when a minimum is found on values for both bias and variance, which corresponds to minimization of errors during training. Variance, , in the context of machine learning, is a type of error that occurs due to a model's sensitivity to small fluctuations in the training dataset. A high variance would cause an algorithm to model noise in the training dataset. This is referred to as overfitting. Variance is the change in the prediction accuracy of the ML model between the training data and the test data. Bias, , in the context of ML is a type of error that occurs due to erroneous assumptions in the learning algorithm. High bias would cause an algorithm to miss relevant relations between the input features and the target output. This is called under-fitting. In figure 12 is possible to read the normalized values of  and  for each neural network architecture and for each composite mixture. The relationships, eqs.19 and eq. 20, were used to select the optimal neural network architecture for each composite mixture: 
+
+			(19)
+
+eq.19 calculates a minimum, for each ANN architecture, arch, between the values pair  with the purpose of finding the overall minimum. It is also utilized eq. 20 to evaluate the overall minimum between  values obtained from the values pair , calculated for each ANN architecture:
+
+		 	(20)
+
+selection is made when a minimum is found in values pair  and a minimum in . Results can be found in table 8 with the corresponding selection of optimal neural network architecture that satisfies eq.19 and eq.20.
+
+
+
+Table 8 - Optimal neural network architectures
+
+ 
+
+
+
+Optimal Architecture
+
+ wt.%=5
+
+ Eq. (19)
+
+[15-25-50-25-15]
+
+
+
+Eq. (20)
+
+[20-40-80-40-20]
+
+   wt.%=13
+
+ Eq. (19)
+
+[5-10-20-10-5]
+
+
+
+Eq. (20)
+
+[25-50-100-50-25]
+
+ wt.%=40
+
+ Eq. (19)
+
+[5-10-20-10-5]
+
+
+
+Eq. (20)
+
+[25-50-100-50-25]
+
+ wt.%=50
+
+ Eq. (19)
+
+[5-10-20-10-5]
+
+
+
+Eq. (20)
+
+[25-50-100-50-25]
+
+
+
+ Eq. (19)
+
+[5-10-20-10-5]
+
+
+
+Eq. (20)
+
+[25-50-100-50-25]
+
+
+
+.
+
+ 
+
+Figure 12 - Normalized bias-variance analysis for each neural network architecture
+
+
+
+Table 9 – Summary table with performance indicators for training processes in the selected number of iterations 
+
+ 
+
+ 
+
+ 
+
+ANN Setup
+
+Results
+
+ 
+
+ 
+
+ 
+
+num. Iter.
+
+batch size
+
+learning rate
+
+MSE
+
+MAE
+
+loss
+
+r2
+
+Bias 
+
+Variance
+
+FC75-023
+
+[5-10-20-10-5]
+
+1000
+
+2
+
+0.0001
+
+0.002
+
+0.032
+
+0.01639
+
+0.96
+
+0.6187
+
+41.3383
+
+
+
+[10-20-40-20-10]
+
+1000
+
+2
+
+0.0
+
+0.001
+
+0.022
+
+0.01639
+
+0.98
+
+0.2990
+
+32.6794
+
+
+
+[15-25-50-25-15]
+
+1000
+
+2
+
+0.0
+
+0.001
+
+0.023
+
+0.01639
+
+0.99
+
+0.0941
+
+15.4034
+
+
+
+[20-40-80-40-20]
+
+1000
+
+2
+
+0.0
+
+0.001
+
+0.021
+
+0.01639
+
+0.98
+
+0.1937
+
+7.3336
+
+
+
+[25-50-100-50-25]
+
+1000
+
+2
+
+0.0
+
+0.001
+
+0.020
+
+0.01639
+
+0.98
+
+0.1467
+
+4.1389
+
+
+
+[50-100-200-100-50]
+
+1000
+
+2
+
+0.0
+
+0.002
+
+0.032
+
+0.01639
+
+0.98
+
+0.0814
+
+0.9013
+
+FC75-060
+
+[5-10-20-10-5]
+
+600
+
+2
+
+0.0001
+
+0.003
+
+0.037
+
+0.01639
+
+0.96
+
+0.8946
+
+46.1285
+
+
+
+[10-20-40-20-10]
+
+600
+
+2
+
+0.0001
+
+0.003
+
+0.038
+
+0.01639
+
+0.95
+
+0.0764
+
+21.6270
+
+
+
+[15-25-50-25-15]
+
+600
+
+2
+
+0.0
+
+0.002
+
+0.032
+
+0.01136
+
+0.99
+
+0.0496
+
+8.5723
+
+
+
+[20-40-80-40-20]
+
+600
+
+2
+
+0.0
+
+0.002
+
+0.032
+
+0.01639
+
+0.96
+
+0.1914
+
+7.4255
+
+
+
+[25-50-100-50-25]
+
+600
+
+2
+
+0.0
+
+0.002
+
+0.032
+
+0.01136
+
+0.99
+
+0.0975
+
+1.5821
+
+
+
+[50-100-200-100-50]
+
+600
+
+2
+
+0.0
+
+0.002
+
+0.028
+
+0.01639
+
+0.98
+
+0.0648
+
+1.1173
+
+FC15-184
+
+[5-10-20-10-5]
+
+800
+
+2
+
+0.001
+
+0.001
+
+0.027
+
+0.05000
+
+0.97
+
+0.1994
+
+2.1661
+
+
+
+[10-20-40-20-10]
+
+800
+
+2
+
+0.0
+
+0.001
+
+0.017
+
+0.05000
+
+0.99
+
+0.1485
+
+0.9613
+
+
+
+[15-25-50-25-15]
+
+800
+
+2
+
+0.0
+
+0.001
+
+0.027
+
+0.05000
+
+0.97
+
+0.0995
+
+0.6577
+
+
+
+[20-40-80-40-20]
+
+800
+
+2
+
+0.0
+
+0.001
+
+0.017
+
+0.05000
+
+0.99
+
+0.0601
+
+0.1729
+
+
+
+[25-50-100-50-25]
+
+800
+
+2
+
+0.001
+
+0.001
+
+0.027
+
+0.05000
+
+0.99
+
+0.0525
+
+0.0941
+
+
+
+[50-100-200-100-50]
+
+800
+
+2
+
+0.0
+
+0.000
+
+0.014
+
+0.05000
+
+0.99
+
+0.0627
+
+0.0996
+
+FC15-230
+
+[5-10-20-10-5]
+
+200
+
+2
+
+0.0
+
+0.002
+
+0.021
+
+0.01942
+
+0.97
+
+0.0187
+
+1.0810
+
+
+
+[10-20-40-20-10]
+
+200
+
+2
+
+0.0
+
+0.003
+
+0.025
+
+0.01942
+
+0.97
+
+0.0244
+
+0.6394
+
+
+
+[15-25-50-25-15]
+
+200
+
+2
+
+0.0
+
+0.002
+
+0.021
+
+0.01942
+
+0.97
+
+0.0171
+
+0.6394
+
+
+
+[20-40-80-40-20]
+
+200
+
+2
+
+0.0
+
+0.002
+
+0.024
+
+0.01942
+
+0.97
+
+0.0145
+
+0.0776
+
+
+
+[25-50-100-50-25]
+
+200
+
+2
+
+0.0
+
+0.002
+
+0.019
+
+0.01942
+
+0.98
+
+0.0127
+
+0.0960
+
+
+
+[50-100-200-100-50]
+
+200
+
+2
+
+0.0
+
+0.002
+
+0.020
+
+0.01942
+
+0.97
+
+0.0161
+
+0.0886
+
+
+
+
+
+Table 9 summarizes the most important statistical data to retain from this modelling study, where is presented selected network architecture with corresponding performance indicators.
+
+Time Dependency when Automating Data Collection
+
+When automating data collection from sensors installed on a DAQ smart device, it is important to understand time dependency in measurements and how it affects the parameters in the model. In any remote monitoring network, smart data acquisition devices can be connected and disconnected from the network at any time. Data collection is carried out by requesting measurements for each individual sensor connected to the network on the corresponding smart device. When dealing with remote data acquisition, it is needed to take into account time as a parameter and part of the data being collected. This parameter enables measurements made to be related to one another by time proximity of data measurements. SCF composites on this study, have temperature dependency, and therefore require additional measurement of the time parameter in order for a smart device connected to a self-sensing SCF composite to be able to calibrate correctly the data output measured [16] and also to allow correlation of data measurements by time proximity. 
+
+Each individual request for data measurements over the network has a time expenditure, from the initial request for measurement at a specific smart device to a successful delivery of requested measurement, from the smart device and through the network. This time expenditure is known in the IT fields as latency. The system components contributing to end-to-end latency start with the processing time in the microcontroller unit (MCU), the end device, due to time expenditure for acquiring and conditioning a digital or analog sensor value.
+
+   
+
+
+
+Figure 13 – Comparison of predicted and actual results for training and testing datasets plotted with ;  
+top row:  ; wt.%=5; bottom row:  ; wt.%=13; 
+
+
+
+   
+
+   
+
+Figure 14 – Comparison of predicted and actual results for training and testing datasets plotted with ;  
+top row:  ; wt.%=40; bottom row:  ; wt.%=50
+
+  
+
+ 
+
+Figure 15 – Comparison of predicted and actual results for training and testing datasets  
+top row left:  ; wt.%=5; top row right:  ; wt.%=13; bottom row left:  ; wt.%=40; bottom row right:  ; wt.%=50
+
+
+
+Latency occurring during the transmission of data through the RF transmitter to the gateway. After reception at the gateway, the data packet is forwarded over an IP network for processing by a server. In the end, data is delivered to the end-user application for further processing, for example, to trigger a software event, control an actuator or machinery. A. Pötsch et al. [62] found end-to-end delays of 400 ms for low transmission distances to be feasible, however, for long-distance transmission of data and up to 15 km requires a high spreading factor and consequently a latency above one second. This poses an additional challenge when designing a monitoring network system for real-time data acquisition and transmission. One possible way to overcome this limitation is to set up a smart DAQ device to transmit collected data measurements wrapped in data bundles. 
+
+To identify the effects of latency when measuring data using smart DAQ devices, in this work, a simple moving average (SMA) curve is plotted on top of the raw experimental data, a curve averaging 120 seconds of collected data,   (figures 13, 14):
+
+			(21)
+
+The  above is the equivalent of slowing data measurements in time, simulating a higher response time and allows to see in a graphical manner the effects of latency in measurements as if traveling through a monitoring network, in this particular case, with a latency of 60 seconds. Moreover, allow identification of predicted values outside the lower and upper boundaries and when it does, is a good indicator that other unknown external factors may be happening influencing measurement results. In everyday usage, as a warning showing the need for human verification and further validation. 
+
+
+
+
+
+
+
+Figure 16 – data (%/100) for each z-score on selected ANN architecture and number of iterations
+
+
+Table 10 - Validation of the data for z=3
+
+Composite
+
+n. iter.
+
+
+ANN
+architecture
+
+
+
+ data validation 
+[0;1]
+
+ wt.%=5
+
+1000
+
+15-25-50-25-15
+
+0.526
+
+   wt.%=13
+
+600
+
+25-50-100-50-25
+
+0.294
+
+ wt.%=40
+
+800
+
+25-50-100-50-25
+
+0.768
+
+ wt.%=50
+
+200
+
+5-10-15-10-5
+
+0.523
+
+
+
+
+
+In figures 13 and 14, is shown the correlation between the relative amplitude of the electrical resistance, , on experimental data (hollow circles), obtained from the laboratory experimental campaign, and corresponding predicted values (black circles) for each selected plot, and for selected ANN architectures. In figure 15, it can be seen in a visual manner, accuracy of predicted outputs with assistance of a 45° invisible line on each plotted chart data for R/R0 of experimental vs predicted output data values. 
+
+As stated previously, 99% of all experimental data is expected to fall within  standard deviations around an average value. In figures 13 and 14, the upper and lower boundaries are plotted for  and a time interval of  (eq. 21). The summary of results is shown in table 10 and figure 16. Although the global performance indicator r2 produced results with values of r2 greater than 0.97 (table 7), when including the time parameter into the analysis, by means of analysis of the  and z score, the importance of that global parameter indicator assumes a different view when modeling the results.
+
+In the right column of table 10 it is possible to read the total number of data points (%/100) that fall within the upper and lower boundaries for . Values presented are in the range of [0;1], and show resulting models outputted from the ANN to lack performance when considering a time delta , this means is needed a higher selection of  values, to ones that are able to satisfy the 0.99 requirement mentioned previously. 
+
+This kind of approach to automate calibration of this type of self-sensing carbon fiber-based composites requires additional study, in particular in the definition of type and number of input parameters required to model successfully an ANN. One possibility is to select a different Neural network model, for instance, Long Short-Term Memory (LSTM) , a recurrent neural network proven to be most suitable to model times series data. One note on this type of network architecture, makes it harder to identify outlier values in data measurements. LSTM is more suitable for modeling when all external variables are well identified and with a well-known behavior. Another important consideration to make when selecting a LSTM is the assumption of a linear sequential time dependency with experimental data. 
+
+Comparison with Traditional Mathematical Regression Models 
+
+Previously published work [14] presented an evaluation of the sensing ability of this type of composites under stress relaxation conditions, using traditional linear regression modeling. The mathematical formulation was as follows. 
+
+Sensitivity  of a specimen at time t when an applied strain translates into stress relaxation, during the subsequent time, , can be evaluated using eq.22:
+
+
+
+				(22)
+
+
+
+where  is the sensitivity at the beginning of the relaxation process. In the previous published work [14] a discrete latent variable model was found, in particular the multiple multiplicative factor model (MMF) to best describe (eq.23) experimental data and to evaluate relaxation behavior during constant external deformation for long periods of time:
+
+
+
+				(23)
+
+
+
+where  is an experimentally determined function (MMF); a, b, c, and d are analytical constants determined during regression analysis from experimental data (see table 11). Although  (Eq. 23) does not equate temperature loading, it can be modified to do so, using results presented in [14].
+
+One of the advantages of using ANN over traditional mathematical regression modeling is the ability to include variables with less obvious mathematical correlation in the model, with respect to the function output being optimized and modeled. For example, include the physical properties of each individual material in the base matrix in a SCF composite, as done in this work, and even include other external parameters, for example, the properties on surrounding materials where the self-sensing SCF composite is embedded.
+
+The determination of calibration curves presented in this work and here [14] enables this kind of carbon-based composites to act as sensors in tandem with their intended structural function connected to purpose-built smart IoT/IIoT DAQ devices capable of performing automated calibration and even to be connected to any structural monitoring system. Moreover, DANN allow modelling of experimental data from a first analysis seems not to be related with the self-sensing CF composite and include, for instance (not on this work), other environmental data in such a way to increase sensitivity accuracy (significative digits).
+
+
+
+
+
+Table 11 - MMF parameters for each composite mix (eq. 23) [14] 
+
+
+
+ (Ω)
+
+S
+
+
+
+
+
+
+
+
+
+
+
+a
+
+b
+
+c
+
+d
+
+5%
+
+60
+
+6.34
+
+36 1/23
+
+5 5/6
+
+-2 2/13
+
+8/37
+
+13%
+
+12
+
+7.35
+
+219  3/76
+
+48  7/78
+
+-4 12/13
+
+5/17
+
+40%
+
+83
+
+-14.24
+
+-213  4/15
+
+94 11/65
+
+55/71
+
+13/30
+
+50%
+
+137
+
+-8.62
+
+-177 20/23
+
+45 13/48
+
+4 22/57
+
+2/7
+
+
+
+Conclusions
+
+Self-sensing materials, in particular carbon-based composites, are critical materials in the fields of materials technology that are, now in 2023, an integral part of IoT & IIoT technologies for data acquisition and measurement about health, condition of use, and even for active structural activity. R measurements obtained from the experimental campaign carried out on this type of self-sensing carbon fiber composites aimed at structural monitoring interconnected using a local monitoring network compatible with Smart IoT DAQ devices. 
+
+The main objective of this study was to step into nonlinear mathematics in a search for new ways to evaluate CF based polymer composites’ sensitivity and calibration. Six ANN model architectures were evaluated for the prediction of electrical resistance, R, outputs from measurements made in specimens with an innovative embedded  electrode design and fabrication. The dataset is based on 3,276 data points collected during the experimental campaign of four different carbon fiber composite mixtures, with varying carbon fiber content and carbon fiber dimensional characteristics.
+
+The input data for ANN training was: the constant deformation time (X1), the diameter to length ratio of the carbon fiber (X2), the volume fraction of the fiber (X3), and the ambient temperature (X4). The output (Y) for the input parameters modeled was the relative amplitude of the electrical resistance,. 
+
+This study evaluated six different ANN architectures and made a selection of the optimal architecture based on performance indicators and complexity of the neural network. Traditional statistical analysis results showed for the composite mixture:
+
+ wt.%=5 the optimal network architecture is [15-25-50-25-15] requires 1000 iterations to be modeled and has a correlation coefficient of 0.99.
+
+ wt.%=13 the optimal network architecture is [25-50-100-50-25] requires 600 iterations to be modeled and has a correlation coefficient of 1.0.
+
+ wt.%=40 the optimal network architecture is [25-50-100-50-25] requires 800 iterations to be modeled and has a correlation coefficient of 0.99.
+
+ wt.%=50 the optimal network architecture is [5-10-20-10-5] requires 200 iterations to be modeled and has a correlation coefficient of 0.98.
+
+When considering evaluation of results including time as a parameter that actively influences modelling of results, was found, and for a z-score of 3, predicted values to be below of what is required with an overall maximum accuracy of 0.768.
+
+With the work presented here, for this type of SCF composites in a state of unchanged deformation () during prolonged periods of time, it is shown to be possible to automate the calibration process, with improved accuracy, using artificial intelligence backpropagation modelling,. 
+
+When installed as an integral part of a structural monitoring system, with live data measurements and recording, performance may vary depending on the quality of collected data. Therefore, additional testing is required to study such dataset changes that affect performance and accuray of the models presented.
+
+Before ending, one key statistic to note about this work: modeling was carried out on an Intel I7 3.1Ghz machine with 16Gb RAM and the total number of hours dedicated to modeling the ANNs was upward of 192h.
+
+
+
+Symbols used 
+
+			
+
+		node weight 
+
+ 		activation function 
+
+		input data vector
+
+		input data value
+
+		output data vector
+
+		output data value
+
+		predicted output data vector
+
+  		predicted value
+
+ 		average predicted value
+
+		loss
+
+		gradient
+
+		gradient mean
+
+		gradient mean with bias
+
+		gradient uncentered variance
+
+		gradient uncentered variance with bias
+
+		decay rate, default 0.9
+
+		decay rate, default 0.999
+
+		default 10-8 
+
+		learning rate
+
+		sensor’s input
+
+		sensor’s output
+
+		final calibrated measurement
+
+ 		random deviation
+
+		sensitivity
+
+ 		diameter
+
+		length 
+
+		cross-section 
+
+		electric resistance
+
+		resistivity
+
+		phase angle
+
+		activation energy
+
+		material frequency
+
+		Boltzmann’s constant
+
+		absolute temperature
+
+		reference temperature
+
+		glass transition temperature
+
+ 		Pearson correlation coefficient
+
+		ANN number of iterations optimal value 
+
+
+
+
+
+CRediT Author Statement 
+
+Miguel Tomás Conceptualization, Methodology, Software, Data curation, Visualization, Investigation. Validation, Writing Said Jalali (https://orcid.org/0000-0003-1234-1825) Partial Funding, Kiera Tabatha (https://orcid.org/0000-0003-2656-4798) Writing, Reviewing and Editing
+
+
+
+Author Acknowledgments
+Miguel Tomás would like to mention Rui Miguel Ferreira (https://orcid.org/0000- 0001-5767-6982) and Filipe Ribeiro (https://orcid.org/0000-0001-8167-9948)for their contributions in reviewing this document with valuable notes and insights.
+
+
+
+Data Availability
+
+Data used to support the findings of this study are available for anyone to download and use here:
+
+ https://dataverse.harvard.edu/dataverse/selfSensingCarbonfiberComposites.
+In this publication was not included the data for other composite mixtures utilized in the research campaign, namely 0.013   SCF contents of 10%. PCB electronics hardware design KiCad files are available on GitHub with a Creative Commons License:
+
+https://github.com/aeonSolutions/PCB-Prototyping-Catalogue/ 
+
+
+
+Declaration of Competing Interest
+
+The author declares to have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
+
+
+
+About the Author 
+
+Miguel Tomás has been researching and implementing technology solutions for start-up businesses and public institutions for the past 20 years. To learn more about the author, connect to his LinkedIn profile page using the following web address: https://www.linkedin.com/in/migueltomas/
+
+
+A final statement about Mental Health in Science
+
+It is found recurrently on the internet news and comments about another scientific researcher, in particular junior and medior researchers, going through some kind of mental health difficulties in particular those associated with sensory overload events. Promoted by abusive usage of wireless devices, assembled or modified to actuate at a distance and invisible, causing harm to a victim’s neurobiology. This is an old area of knowledge, that now needs to be openly discussed and commented, in a peaceful constructive way towards identification of solutions to all abusive usages of wireless frequency waves (radiation or vibration) in electronic devices. Open solutions are the correct path toward safety in usage of all things related to such technologies. Be knowledgeable to stay safe.  
+
+
+
+References
+
+	W. Shi, J. Cao, et al., “Edge computing: Vision and challenges,” in J. IEEE Internet Things, vol. 3(5), pp. 637–646, 2016.
+
+	M. Satyanarayanan, T. Eiszler, et al.,"Edge Computing for Legacy Applications," in IEEE Pervasive Computing, vol. 19(4), pp. 19-28, 2020
+
+	Dianlei Xu, Tong Li, et al., “Edge Intelligence: Architectures, Challenges, and Applications”, arXiv:2003.12172v2, 2020
+
+	Ali Alnoman, Shree Krishna Sharma, et al., “Emerging Edge Computing Technologies for Distributed Internet of Things (IoT) Systems”, arXiv:1811.11268v1, 2018
+
+	Arun Kumar, R. Dhanagopal, et al., “A comprehensive study on the role of advanced technologies in 5G based smart hospital” in Alexandria Engineering Journal, vol.60(6), pp. 5527-5536, 2021
+
+	YuanAi, Mugen Peng, et al., “Edge computing technologies for Internet of Things: a primer” in J. Digital Communications and Networks, vol. 4(2), pp. 77-86, 2018
+
+	M. H. Miraz, M. Ali, et al., “A Review on Internet of Things (IoT), Internet of Everything (IoE) and Internet of Nano Things (IoNT)” in Internet Technologies and Applications, pages 219– 224, 2018
+
+	Ghassan Abdo, Melissa Fremeijer-Holtz, “Worldwide Content Delivery Networks Forecast 2021–2025” in International Data Corporation (IDC), March 2021
+
+	K. K. Patel, S. M. Patel, et al., “Internet of things IoT: definition, characteristics, architecture, enabling technologies, application future challenges” in International journal of engineering science and computing, vol. 6(5), pages 6122–6131, 2016
+
+	R. Jain, “A Congestion Control System Based on VANET for Small Length Roads” in Annals of Emerging Technologies in Computing vol. 2(1), pages 17–21, 2018
+
+	S. H. Mahmud, L. Assan, et al., “Potentials of Internet of Things (IoT) in Malaysian Construction Industry” in Annals of Emerging Technologies in Computing, vol. 2(1), pages 44-52, 2018
+
+	Wang LH, Cheng LH., “Piezoresistive effect of a carbon nanotube silicone-matrix composite”, Carbon vol.71(0), pp. 319-31, 2014
+
+	Miguel Tomás, Said Jalali, “Piezoresistivity in Micro Carbon Fiber Silicone Composites for Electrical Resistance to Strain Sensing” in Advanced Engineering Forum vol. 23, pp. 45-55, 2017
+
+	Tomás M, Jalali S, Silva de Vargas A., “Creep evaluation and temperature dependence in self-sensing micro carbon polymer-based composites for further development as an Internet of Things Sensor device”, Journal of Composite Materials. Vol. 56(6), December 2021
+
+	J. Fraden, “Handbook of modern sensors: physics, designs, and applications” in Springer Science & Business Media, 2004
+
+	 Anas Wasill Alhashimi, “Statistical Sensor Calibration Algorithms”, in 2018 PhD thesis, Department of Computer Science Electrical and Space Engineering, Division of Signals and Systems, Luleå University of Technology, Sweden
+
+	Y. Wang, J. Edgell, et al, “Self-healing of structural carbon fibres in polymer composites”, Cogent Engineering, 7:1, 2020
+
+	G. Williams, R. Trask, et al, “A self-healing carbon fibre reinforced polymer for aerospace applications”, Composites Part A: Applied Science and Manufacturing, pp. 1525-1532, Vol.38(6), 2007
+
+	B. Ribeiro, “Support Vector Machines for Quality Monitoring in a Plastic Injection Molding Process” in IEEE Transactions on Systems, Man and Cybernetics, Part C (Applications and Reviews) 35(3), pp.401-410, 2005. 
+
+	P. Larrañaga, D. Atienza, et al., “Industrial Applications of Machine Learning, 1st ed., CRC Press 2018. 
+
+	Alexander Y. S., Bridget R. S.,” How can Big Data and machine learning benefit environment and water management: a survey of methods, applications, and future directions” in Environ. Res. Lett., vol.14, n.07(3001), 2019
+
+	F. Bock, R. Aydin, et al., “A Review of the Application of Machine Learning and Data Mining Approaches in Continuum Materials Mechanics” in Frontiers in Materials, vol.6, p.110, 2019
+
+	J. Schmidt, M.R.G. Marques, S. Botti, et al., “Recent advances and applications of machine learning in solid-state materials science” in npj Computational Materials vol.5, p.83, 2019
+
+	Hadi Salehi, Rigoberto Burgueño, “Emerging artificial intelligence methods in structural engineering” in Engineering Structures, vol.171, pp.170-189, 2018
+
+	V. Cherkassky, V. Krasnopolsky, et al., “Computational intelligence in earth sciences and environmental applications: Issues and challenges” in Neural Networks: The Official Journal of the International Neural Network Society, 19(2), pp.113-121, 2006
+
+	E.P. Koumoulos, S.A.M. Tofail, et al., “Metrology and nano -mechanical tests for nano -manufacturing and nano -bio interface: Challenges & future perspectives” in Materials & Design vol.137, pp.446 -462, 2018 
+
+	P.P. Angelov, X. Gu, “Empirical Approach to Machine Learning” in Springer Nature Switzerland AG, Switzerland, 2019. 
+
+	D. Zhang, L. Qian, et al., “A Data -Driven Design for Fault Detection of Wind Turbines Using Random Forests and XGboost” in IEEE Access, vol.6, 21020 -21031, 2018 
+
+	Luísa R. V., Eduardo L. C., et al., “Artificial Neural Networks applying to detect damage in carbon fiber/epoxy composites” in Brazilian Conference on Composite Materials, 2018
+
+	Konstantopoulos, Georgios, et al. ‘Classification of Mechanism of Reinforcement in the Fiber-Matrix Interface: Application of Machine Learning on Nanoindentation Data’. Materials & Design, vol.192, 108705, 2020
+
+	Daniel Sammons, et al., “Segmenting Delaminations in Carbon Fiber Reinforced Polymer Composite CT Using Convolutional Neural Networks” in AIP Conference Proceedings 1706, 110014, 2016
+
+	Hassan H, Tallman TN., “Precise damage shaping in self-sensing composites using electrical impedance tomography and genetic algorithms” in J. Structural Health Monitoring. vol.22(1), pp-372-387 2022
+
+	Hassan H, Tallman TN. , “Failure prediction in self-sensing nanocomposites via genetic algorithm-enabled piezoresistive inversion”, in J. Structural Health Monitoring. vol 19(3) pp.765-780 2020 
+
+	N. Dey, S. Wagh, et al., “Applied machine learning for smart data analysis”, 1st ed., CRC Press/Taylor & Francis Group, New York, NY, 2019
+
+	V.A. Dev, M.R. Eden, “Formation lithology classification using scalable gradient boosted decision trees” in Journal Pre-proof Journal Pre-proof Computers & Chemical Engineering, vol.128, pp.392 -404, 2019 
+
+	B. Lantz, “Machine Learning with R - Third Edition”, 3rd ed., Packt Publishing Ltd., Birmingham, 2019. 
+
+	B. Gupta, Q.Z. Sheng, “Machine learning for computer and cyber security: principles, algorithms, and practices”, Boca Raton, FL: Taylor & Francis Group, 2019
+
+	Fengjie Wang, Mehebub Sahana, et al., “Applying different resampling strategies in machine learning models to predict head-cut gully erosion susceptibility” in Alexandria Engineering Journal, vol.60(6), pp. 5813-5829, 2021
+
+	A. Panesar, “Machine Learning and AI for Healthcare”, Apress, Coventry, UK, 2019.
+
+	M.A.N. Dewapriya, R.K.N.D. Rajapakse, et al., “Characterizing fracture stress of defective graphene samples using shallow and deep artificial neural networks” in J. Carbon, vol.163, pp 425-440, 2020
+
+	Georg Daniel Förster, Alice Castan, et al., “A deep learning approach for determining the chiral indices of carbon nanotubes from high-resolution transmission electron microscopy images” in J. Carbon, vol.169, pp. 465-474, 2020
+
+	Park JM, Lee SI, et al., “Cure monitoring and residual stress sensing of single-carbon fiber reinforced epoxy composites using electrical resistivity”, 2005 Composites Science Technology. , vol. 65, pages 571–580.
+
+	Biqin Dong, Zongjin Li, et al., “Cement-based piezoelectric ceramic smart composites” in J. Composites Sci. and Tech., vol. 65, pp. 1363-1371, 2005
+
+	Timothy M. Johnson, David T., et al., “Strain monitoring of carbon fiber composite via embedded nickel nano-particles” in J. Composites vol.43, pp.1155-1163, 2012
+
+	Chung DDL, Wang S., “Carbon fiber polymer-matrix structural composite as a semiconductor and concept of optoelectronic and electronic devices made from it”, in J. Smart Material Structures, vol. 8, pp. 161–166, 1999
+
+	W.J. McCarte, G. Starrs, et al., “Activation energy and conduction in carbon fiber-reinforced cement matrices” in J. Materials Science, vol.42, pp.2200–2203, 2007
+
+	Zener, C., “Elasticity and Anelasticity of Metals”, 1948 University of Chicago Press.
+
+	Backman D. G., Williams J. C., “Advanced Materials for Aircraft Engine Applications”, in Science, vol.255, pp. 1082–1087, 1992
+
+	McCarte WJ, Starrs G, et al., Activation energy and conduction in carbon fiber-reinforced cement matrices. Materials Science 2007; 42: 2200–2203.
+
+	Thierry Rey, Gregory Chagnon, et al., “Effects of temperature on the mechanical behavior of filled and unfilled silicone rubbers” in European Conference on Constitutive Models for Rubber VIII, 2013
+
+	Xiaoping Shui, D.D.L. Chung, “A piezoresistive carbon filament polymer-matrix composite strain sensor” in Smart Mater. Struct., vol. 5 pp. 243-246, 1996
+
+	I. H. Witten, E. Frank, et al., “Chapter 7-data transformations,” in Data Management Systems, I. H. Witten, E. Frank, and T. E. Hall, Eds., pp. 305–349, Morgan Kaufmann, Burlington, MA, USA, 2011
+
+	C. M. Bishop, “Pattern Recognition and Machine Learning (Information Science and Statistics)” in Springer-Verlag, Germany, 2006
+
+	R. Zhou, D. Wu, et al., “A Levenberg-Marquardt backpropagation neural network for predicting forest growing stock based on the least-squares equation fitting parameters” in J. Forests, vol. 9(12), p. 757, 2018
+
+	H. T. Huynh and Y. Won, “Training single hidden layer feedforward neural networks by singular value decomposition,” in Proceedings of the 2009 Fourth International Conference on Computer Sciences and Convergence Information Technology, pp. 1300–1304, Seoul, Korea, 2009
+
+	T.-S. Yan, Y.-Q. Tao, et al., “Research on hand-written numeral recognition method based on improved genetic algorithm and neural network,” in Proceedings of the 2007 International Conference on Wavelet Analysis and Pattern Recognition, vol. 3, pp. 1271–1276, China, 2007
+
+	A. Al-Taani, M. Hammad, “Recognition of on-line handwritten Arabic digits using structural features and transition network” in J. Informatica (Slovenia), vol.32(3), pp.275–281, 2008
+
+	M. Otair, A. S. Walid, “Speeding up back-propagation neural networks,” in Proceedings of the 2005 Informing Science and IT Education Joint Conference, vol. 1, Flagstaﬀ, AZ, USA, 2005
+
+	M. D. Nguyen, B. T. Pham, et al., “Soft-computing techniques for prediction of soils consolidation coeﬃcient” in Catena, vol. 195, Article ID 104802, 2020
+
+	D. V. Dao, H. Adeli, et al., “A sensitivity and robustness analysis of GPR and ANN for high-performance concrete compressive strength prediction using a Monte Carlo simulation” in J. Sustainability, vol. 12(3), p. 830, 2020
+
+	Adrian Ţăran-Moroşan , “The relative strength index revisited”, African Journal of Business Management Vol. 5(14), pp. 5855-5862, 18 July, 2011, ISSN 1993-8233
+
+	A. Pötsch and F. Hammer, "Towards End-to-End Latency of LoRaWAN: Experimental Analysis and IIoT Applicability," 2019 15th IEEE International Workshop on Factory Communication Systems (WFCS), 2019, pp. 1-4, doi: 10.1109/WFCS.2019.8758033.
+
+	T.H. Le, H.-L. Nguyen, et al., “Artificial intelligence-based model for the prediction of dynamic modulus of stone mastic asphalt” in J. Applied Sciences, vol.10(15), p. 5242, 2020
+
+	T. B. Pham, S. K. Singh, et al., “Using artificial neural network (ANN) for prediction of soil coefficient of consolidation” in Vietnam Journal of Earth Sciences, vol. 42(4), pp. 311–319, 2020.
+
+	P. Sarir, J. Chen, et al., “Developing GEP tree-based, neuro-swarm, and whale optimization models for evaluation of bearing capacity of concrete-filled steel tube columns” in J. Engineering with Computers, vol.37, pp.1–19, 2019
